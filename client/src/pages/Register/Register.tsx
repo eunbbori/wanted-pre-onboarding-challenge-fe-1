@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import AppLabel from "../../components/AppLabel/AppLabel";
 import { UserInfo } from "../../type/userInfo";
 
 const Register = () => {
@@ -18,8 +19,9 @@ const Register = () => {
   };
   return (
     <form onSubmit={handleSubmit(onSubmitHandler)}>
-      <label>name</label>
+      <AppLabel htmlFor="name" text="이름 : " />
       <input
+        id="name"
         {...register("name", { required: true, minLength: 1, maxLength: 20 })}
       />
       {errors.name && errors.name.type === "required" && (
@@ -31,8 +33,9 @@ const Register = () => {
       {errors.name && errors.name.type === "maxLength" && (
         <div>이름은 최대 20글자만 입력할 수 있습니다</div>
       )}
-      <label>nickname</label>
+      <AppLabel htmlFor="nickname" text="닉네임 : " />
       <input
+        id="nickname"
         {...register("nickname", {
           required: true,
           minLength: 1,
@@ -48,8 +51,9 @@ const Register = () => {
       {errors.nickname && errors.nickname.type === "maxLength" && (
         <div>닉네임은 최대 20글자만 입력할 수 있습니다</div>
       )}
-      <label>email</label>
+      <AppLabel htmlFor="email" text="이메일 : " />
       <input
+        id="email"
         {...register("email", {
           required: true,
           pattern: /[^\s@]+@[^\s@]+\.[^\s@]+/,
@@ -62,8 +66,9 @@ const Register = () => {
       {errors.email && errors.email.type === "pattern" && (
         <div>올바른 이메일 형식이 아닙니다</div>
       )}
-      <label>password</label>
+      <AppLabel htmlFor="password" text="비밀번호 : " />
       <input
+        id="password"
         {...register("password", { required: true, minLength: 6 })}
         type="password"
       />
@@ -74,8 +79,9 @@ const Register = () => {
         errors.password.type === "minLength" && ( // TODO 대소문자,특수문자 섞어서
           <div>비밀번호는 최소 6글자 입력해야합니다</div>
         )}
-      <label>password_confirm</label>
+      <AppLabel htmlFor="password_confirm" text="비밀번호확인 : " />
       <input
+        id="password_confirm"
         {...register("password_confirm", {
           required: true,
           validate: (value) => value === passwordRef.current,
