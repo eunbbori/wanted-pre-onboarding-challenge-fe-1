@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { AppButtonProps } from "./AppButton";
+import Theme from "./../../styles/Theme";
 
 export const Button = styled.button<AppButtonProps>`
   width: ${(props) => props.width};
@@ -7,10 +8,10 @@ export const Button = styled.button<AppButtonProps>`
   border-radius: 5px;
   border: 1px solid #dbdbdb;
   color: #333;
-  background: #ff9a9e;
+  background: ${Theme.color.color2};
   font-weight: bold;
 
   &:hover {
-    background-color: #fecfef;
+    background-color: ${Theme.color.color3};
   }
 `;
