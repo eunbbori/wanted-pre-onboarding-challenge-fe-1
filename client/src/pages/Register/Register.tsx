@@ -1,8 +1,24 @@
+// eslint-disable-next-line no-warning-comments
+// TODO input 컴포넌트 분리 리팩토링
+
 import { useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import AppButton from "../../components/AppButton/AppButton";
 import AppLabel from "../../components/AppLabel/AppLabel";
 import { UserInfo } from "../../type/userInfo";
+import {
+  Container,
+  Title,
+  TitleContainer,
+  FormContainer,
+  NameDiv,
+  NickNameDiv,
+  EmailDiv,
+  PasswordDiv,
+  PasswordConfirmDiv,
+  ButtonContainer,
+  InputContainer,
+} from "./RegisterStyle";
 
 const Register = () => {
   const {
@@ -19,91 +35,115 @@ const Register = () => {
     console.log(data);
   };
   return (
-    <form onSubmit={handleSubmit(onSubmitHandler)}>
-      <AppLabel htmlFor="name" text="이름 : " />
-      <input
-        id="name"
-        {...register("name", { required: true, minLength: 1, maxLength: 20 })}
-      />
-      {errors.name && errors.name.type === "required" && (
-        <div>이름을 입력해주세요</div>
-      )}
-      {errors.name && errors.name.type === "minLength" && (
-        <div>이름은 최소 1글자 입력해야합니다</div>
-      )}
-      {errors.name && errors.name.type === "maxLength" && (
-        <div>이름은 최대 20글자만 입력할 수 있습니다</div>
-      )}
-      <AppLabel htmlFor="nickname" text="닉네임 : " />
-      <input
-        id="nickname"
-        {...register("nickname", {
-          required: true,
-          minLength: 1,
-          maxLength: 10,
-        })}
-      />
-      {errors.nickname && errors.nickname.type === "required" && (
-        <div>닉네임을 입력해주세요</div>
-      )}
-      {errors.nickname && errors.nickname.type === "minLength" && (
-        <div>닉네임은 최소 1글자 입력해야합니다</div>
-      )}
-      {errors.nickname && errors.nickname.type === "maxLength" && (
-        <div>닉네임은 최대 20글자만 입력할 수 있습니다</div>
-      )}
-      <AppLabel htmlFor="email" text="이메일 : " />
-      <input
-        id="email"
-        {...register("email", {
-          required: true,
-          pattern: /[^\s@]+@[^\s@]+\.[^\s@]+/,
-        })}
-        type="email"
-      />
-      {errors.email && errors.email.type === "required" && (
-        <div>이메일을 입력해주세요</div>
-      )}
-      {errors.email && errors.email.type === "pattern" && (
-        <div>올바른 이메일 형식이 아닙니다</div>
-      )}
-      <AppLabel htmlFor="password" text="비밀번호 : " />
-      <input
-        id="password"
-        {...register("password", { required: true, minLength: 6 })}
-        type="password"
-      />
-      {errors.password && errors.password.type === "required" && (
-        <div>비밀번호를 입력해주세요</div>
-      )}
-      {errors.password &&
-        errors.password.type === "minLength" && ( // TODO 대소문자,특수문자 섞어서
-          <div>비밀번호는 최소 6글자 입력해야합니다</div>
-        )}
-      <AppLabel htmlFor="password_confirm" text="비밀번호확인 : " />
-      <input
-        id="password_confirm"
-        {...register("password_confirm", {
-          required: true,
-          validate: (value) => value === passwordRef.current,
-        })}
-        type="password"
-      />
-      {errors.password_confirm &&
-        errors.password_confirm.type === "required" && (
-          <div>비밀번호를 한번 더 입력해주세요</div>
-        )}
-      {errors.password_confirm &&
-        errors.password_confirm.type === "validate" && (
-          <div>설정한 비밀번호와 다릅니다</div>
-        )}
-      <AppButton
-        width={"80px"}
-        className={"registerBtn"}
-        type={"submit"}
-        text="가입하기"
-      />
-    </form>
+    <Container>
+      <FormContainer onSubmit={handleSubmit(onSubmitHandler)}>
+        <TitleContainer>
+          <Title>Register Here</Title>
+        </TitleContainer>
+        <InputContainer>
+          <NameDiv>
+            <AppLabel htmlFor="name" text="Name" />
+            <input
+              id="name"
+              {...register("name", {
+                required: true,
+                minLength: 1,
+                maxLength: 20,
+              })}
+            />
+            {errors.name && errors.name.type === "required" && (
+              <div>이름을 입력해주세요</div>
+            )}
+            {errors.name && errors.name.type === "minLength" && (
+              <div>이름은 최소 1글자 입력해야합니다</div>
+            )}
+            {errors.name && errors.name.type === "maxLength" && (
+              <div>이름은 최대 20글자만 입력할 수 있습니다</div>
+            )}
+          </NameDiv>
+          <NickNameDiv>
+            <AppLabel htmlFor="nickname" text="Nickname" />
+            <input
+              id="nickname"
+              {...register("nickname", {
+                required: true,
+                minLength: 1,
+                maxLength: 10,
+              })}
+            />
+            {errors.nickname && errors.nickname.type === "required" && (
+              <div>닉네임을 입력해주세요</div>
+            )}
+            {errors.nickname && errors.nickname.type === "minLength" && (
+              <div>닉네임은 최소 1글자 입력해야합니다</div>
+            )}
+            {errors.nickname && errors.nickname.type === "maxLength" && (
+              <div>닉네임은 최대 20글자만 입력할 수 있습니다</div>
+            )}
+          </NickNameDiv>
+          <EmailDiv>
+            <AppLabel htmlFor="email" text="Email" />
+            <input
+              id="email"
+              {...register("email", {
+                required: true,
+                pattern: /[^\s@]+@[^\s@]+\.[^\s@]+/,
+              })}
+              type="email"
+            />
+            {errors.email && errors.email.type === "required" && (
+              <div>이메일을 입력해주세요</div>
+            )}
+            {errors.email && errors.email.type === "pattern" && (
+              <div>올바른 이메일 형식이 아닙니다</div>
+            )}
+          </EmailDiv>
+          <PasswordDiv>
+            <AppLabel htmlFor="password" text="Password" />
+            <input
+              id="password"
+              {...register("password", { required: true, minLength: 6 })}
+              type="password"
+            />
+            {errors.password && errors.password.type === "required" && (
+              <div>비밀번호를 입력해주세요</div>
+            )}
+            {errors.password &&
+              // eslint-disable-next-line no-warning-comments
+              errors.password.type === "minLength" && ( // TODO 대소문자,특수문자 섞어서
+                <div>비밀번호는 최소 6글자 입력해야합니다</div>
+              )}
+          </PasswordDiv>
+          <PasswordConfirmDiv>
+            <AppLabel htmlFor="password_confirm" text="Confirm" />
+            <input
+              id="password_confirm"
+              {...register("password_confirm", {
+                required: true,
+                validate: (value) => value === passwordRef.current,
+              })}
+              type="password"
+            />
+            {errors.password_confirm &&
+              errors.password_confirm.type === "required" && (
+                <div>비밀번호를 한번 더 입력해주세요</div>
+              )}
+            {errors.password_confirm &&
+              errors.password_confirm.type === "validate" && (
+                <div>설정한 비밀번호와 다릅니다</div>
+              )}
+          </PasswordConfirmDiv>
+        </InputContainer>
+        <ButtonContainer>
+          <AppButton
+            width={"200px"}
+            className={"registerBtn"}
+            type={"submit"}
+            text="Register"
+          />
+        </ButtonContainer>
+      </FormContainer>
+    </Container>
   );
 };
 
