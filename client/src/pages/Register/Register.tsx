@@ -11,11 +11,8 @@ import {
   Title,
   TitleContainer,
   FormContainer,
-  NameDiv,
-  NickNameDiv,
-  EmailDiv,
-  PasswordDiv,
-  PasswordConfirmDiv,
+  InputDiv,
+  ErrorDiv,
   ButtonContainer,
   InputContainer,
 } from "./RegisterStyle";
@@ -41,7 +38,7 @@ const Register = () => {
           <Title>Register Here</Title>
         </TitleContainer>
         <InputContainer>
-          <NameDiv>
+          <InputDiv position="center">
             <AppLabel htmlFor="name" text="Name" />
             <input
               id="name"
@@ -51,6 +48,8 @@ const Register = () => {
                 maxLength: 20,
               })}
             />
+          </InputDiv>
+          <ErrorDiv>
             {errors.name && errors.name.type === "required" && (
               <div>이름을 입력해주세요</div>
             )}
@@ -60,8 +59,8 @@ const Register = () => {
             {errors.name && errors.name.type === "maxLength" && (
               <div>이름은 최대 20글자만 입력할 수 있습니다</div>
             )}
-          </NameDiv>
-          <NickNameDiv>
+          </ErrorDiv>
+          <InputDiv position="center">
             <AppLabel htmlFor="nickname" text="Nickname" />
             <input
               id="nickname"
@@ -71,6 +70,8 @@ const Register = () => {
                 maxLength: 10,
               })}
             />
+          </InputDiv>
+          <ErrorDiv>
             {errors.nickname && errors.nickname.type === "required" && (
               <div>닉네임을 입력해주세요</div>
             )}
@@ -80,8 +81,8 @@ const Register = () => {
             {errors.nickname && errors.nickname.type === "maxLength" && (
               <div>닉네임은 최대 20글자만 입력할 수 있습니다</div>
             )}
-          </NickNameDiv>
-          <EmailDiv>
+          </ErrorDiv>
+          <InputDiv position="center">
             <AppLabel htmlFor="email" text="Email" />
             <input
               id="email"
@@ -91,20 +92,24 @@ const Register = () => {
               })}
               type="email"
             />
+          </InputDiv>
+          <ErrorDiv>
             {errors.email && errors.email.type === "required" && (
               <div>이메일을 입력해주세요</div>
             )}
             {errors.email && errors.email.type === "pattern" && (
               <div>올바른 이메일 형식이 아닙니다</div>
             )}
-          </EmailDiv>
-          <PasswordDiv>
+          </ErrorDiv>
+          <InputDiv position="center">
             <AppLabel htmlFor="password" text="Password" />
             <input
               id="password"
               {...register("password", { required: true, minLength: 6 })}
               type="password"
             />
+          </InputDiv>
+          <ErrorDiv>
             {errors.password && errors.password.type === "required" && (
               <div>비밀번호를 입력해주세요</div>
             )}
@@ -113,8 +118,8 @@ const Register = () => {
               errors.password.type === "minLength" && ( // TODO 대소문자,특수문자 섞어서
                 <div>비밀번호는 최소 6글자 입력해야합니다</div>
               )}
-          </PasswordDiv>
-          <PasswordConfirmDiv>
+          </ErrorDiv>
+          <InputDiv position="center">
             <AppLabel htmlFor="password_confirm" text="Confirm" />
             <input
               id="password_confirm"
@@ -124,6 +129,8 @@ const Register = () => {
               })}
               type="password"
             />
+          </InputDiv>
+          <ErrorDiv>
             {errors.password_confirm &&
               errors.password_confirm.type === "required" && (
                 <div>비밀번호를 한번 더 입력해주세요</div>
@@ -132,7 +139,7 @@ const Register = () => {
               errors.password_confirm.type === "validate" && (
                 <div>설정한 비밀번호와 다릅니다</div>
               )}
-          </PasswordConfirmDiv>
+          </ErrorDiv>
         </InputContainer>
         <ButtonContainer>
           <AppButton
