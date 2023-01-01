@@ -10,19 +10,27 @@ const Register = () => {
     formState: { errors },
   } = useForm<UserInfo>();
 
-  // const passwordRef = useRef<string | null>(null);
-  // passwordRef.current = watch("password");
+  const passwordRef = useRef<string | null>(null);
+  passwordRef.current = watch("password");
 
   const onSubmitHandler: SubmitHandler<UserInfo> = (data) => {
     console.log(data);
   };
-
   return (
     <form onSubmit={handleSubmit(onSubmitHandler)}>
       <label>name</label>
       <input
         {...register("name", { required: true, minLength: 1, maxLength: 20 })}
       />
+      {errors.name && errors.name.type === "required" && (
+        <div>이름을 입력해주세요</div>
+      )}
+      {errors.name && errors.name.type === "minLength" && (
+        <div>이름은 최소 1글자 입력해야합니다</div>
+      )}
+      {errors.name && errors.name.type === "maxLength" && (
+        <div>이름은 최대 20글자만 입력할 수 있습니다</div>
+      )}
       <label>nickname</label>
       <input
         {...register("nickname", {
@@ -31,27 +39,57 @@ const Register = () => {
           maxLength: 10,
         })}
       />
+      {errors.nickname && errors.nickname.type === "required" && (
+        <div>닉네임을 입력해주세요</div>
+      )}
+      {errors.nickname && errors.nickname.type === "minLength" && (
+        <div>닉네임은 최소 1글자 입력해야합니다</div>
+      )}
+      {errors.nickname && errors.nickname.type === "maxLength" && (
+        <div>닉네임은 최대 20글자만 입력할 수 있습니다</div>
+      )}
       <label>email</label>
       <input
         {...register("email", {
           required: true,
-          pattern: /^\S+@\S+$/i,
+          pattern: /[^\s@]+@[^\s@]+\.[^\s@]+/,
         })}
         type="email"
       />
+      {errors.email && errors.email.type === "required" && (
+        <div>이메일을 입력해주세요</div>
+      )}
+      {errors.email && errors.email.type === "pattern" && (
+        <div>올바른 이메일 형식이 아닙니다</div>
+      )}
       <label>password</label>
       <input
-        {...(register("password"), { required: true, minLength: 6 })}
+        {...register("password", { required: true, minLength: 6 })}
         type="password"
-      ></input>
+      />
+      {errors.password && errors.password.type === "required" && (
+        <div>비밀번호를 입력해주세요</div>
+      )}
+      {errors.password &&
+        errors.password.type === "minLength" && ( // TODO 대소문자,특수문자 섞어서
+          <div>비밀번호는 최소 6글자 입력해야합니다</div>
+        )}
       <label>password_confirm</label>
       <input
         {...register("password_confirm", {
           required: true,
-          // validate: (value) => value === passwordRef.current,
+          validate: (value) => value === passwordRef.current,
         })}
         type="password"
-      ></input>
+      />
+      {errors.password_confirm &&
+        errors.password_confirm.type === "required" && (
+          <div>비밀번호를 한번 더 입력해주세요</div>
+        )}
+      {errors.password_confirm &&
+        errors.password_confirm.type === "validate" && (
+          <div>설정한 비밀번호와 다릅니다</div>
+        )}
       <button type="submit">가입하기</button>
     </form>
   );
