@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import AppButton from "../../components/AppButton/AppButton";
 import AppLabel from "../../components/AppLabel/AppLabel";
 import { UserInfo } from "../../type/userInfo";
 
@@ -96,7 +97,12 @@ const Register = () => {
         errors.password_confirm.type === "validate" && (
           <div>설정한 비밀번호와 다릅니다</div>
         )}
-      <button type="submit">가입하기</button>
+      <AppButton
+        width={"80px"}
+        className={"registerBtn"}
+        type={"submit"}
+        text="가입하기"
+      />
     </form>
   );
 };
