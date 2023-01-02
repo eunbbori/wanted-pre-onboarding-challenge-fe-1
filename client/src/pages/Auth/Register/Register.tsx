@@ -40,7 +40,7 @@ const Register = () => {
     axios
       .post(`${DB_DOMAIN_URL}users/create`, newData)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         navigate("/login");
       })
       .catch((error) => {

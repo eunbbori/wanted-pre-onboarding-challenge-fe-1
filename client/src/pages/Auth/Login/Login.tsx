@@ -22,24 +22,26 @@ const Login = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  // const onSubmitHandler: (data) => {
-  //   // const email = data.email;
-  //   // const password = data.password;
-  //   // const newData = { email, password };
-  //   // axios
-  //   //   .post(`${DB_DOMAIN_URL}users/login`, newData)
-  //   //   .then((res) => {
-  //   //     console.log(res.data);
-  //   //     navigate("/");
-  //   //   })
-  //   //   .catch((error) => {
-  //   //     console.log(error.data);
-  //   //   });
-  //   console.log(data);
-  // };
+  const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const email = emailRef.current!.value;
+    const password = passwordRef.current!.value;
+    const loginData = { email, password };
+    axios
+      .post(`${DB_DOMAIN_URL}users/login`, loginData)
+      .then((res) => {
+        // console.log(res.data);
+        localStorage.setItem("login-token", res.data.token);
+        navigate("/");
+      })
+      .catch((error) => {
+        alert("이메일 또는 비밀번호가 틀립니다");
+        console.log(error.data);
+      });
+  };
   return (
     <Container>
-      <FormContainer>
+      <FormContainer onSubmit={onSubmitHandler}>
         <TitleContainer>
           <Title>Login Here</Title>
         </TitleContainer>
