@@ -6,8 +6,8 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="auth/login" element={<Login />} />
+        <Route path="auth/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );
