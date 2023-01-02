@@ -7,6 +7,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import AppButton from "../../../components/AppButton/AppButton";
 import AppLabel from "../../../components/AppLabel/AppLabel";
 import { UserInfo } from "../../../type/userInfo";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Container,
   Title,
@@ -26,6 +27,8 @@ const Register = () => {
     formState: { errors },
   } = useForm<UserInfo>();
 
+  const navigate = useNavigate();
+
   const passwordRef = useRef<string | null>(null);
   passwordRef.current = watch("password");
 
@@ -37,6 +40,7 @@ const Register = () => {
       .post("http://localhost:8080/users/create", newData)
       .then((res) => {
         console.log(res.data);
+        navigate("/login");
       })
       .catch((error) => {
         console.log(error.data);
