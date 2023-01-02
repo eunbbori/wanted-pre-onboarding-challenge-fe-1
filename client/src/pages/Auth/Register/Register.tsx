@@ -33,20 +33,20 @@ const Register = () => {
   const passwordRef = useRef<string | null>(null);
   passwordRef.current = watch("password");
 
-  const onSubmitHandler: SubmitHandler<UserInfo> = (data) => {
+  const onSubmitHandler: SubmitHandler<UserInfo> = async (data) => {
     const email = data.email;
     const password = data.password;
     const newData = { email, password };
-    axios
-      .post(`${DB_DOMAIN_URL}users/create`, newData)
-      .then((res) => {
-        // console.log(res.data);
+    const res = await axios.post(`${DB_DOMAIN_URL}/users/create`, newData);
+    try {
+      if (res.status === 200) {
         navigate("/login");
-      })
-      .catch((error) => {
-        console.log(error.data);
-      });
-    console.log(data);
+      } else {
+        alert(res.data.details);
+      }
+    } catch (error) {
+      alert(error);
+    }
   };
   return (
     <Container>

@@ -29,21 +29,25 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const onSubmitHandler: SubmitHandler<UserInfo> = (data) => {
+  if (localStorage.getItem("login-token")) {
+    navigate("/");
+  }
+
+  const onSubmitHandler: SubmitHandler<UserInfo> = async (data) => {
     const email = data.email;
     const password = data.password;
     const loginData = { email, password };
-    axios
-      .post(`${DB_DOMAIN_URL}users/login`, loginData)
-      .then((res) => {
-        // console.log(res.data);
+    try {
+      const res = await axios.post(`${DB_DOMAIN_URL}/users/login`, loginData);
+      if (res.status === 200) {
         localStorage.setItem("login-token", res.data.token);
         navigate("/");
-      })
-      .catch((error) => {
-        alert("이메일 또는 비밀번호가 틀립니다");
-        console.log(error.data);
-      });
+      } else {
+        alert(res.data.details);
+      }
+    } catch (error) {
+      alert(error);
+    }
   };
   return (
     <Container>
