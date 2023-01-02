@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import Theme from "../../../styles/Theme";
 
+interface InputDiv {
+  position: string;
+}
+
 export const Container = styled.div`
   position: absolute;
   top: 0;
@@ -38,8 +42,8 @@ export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
-export const InputDiv = styled.div`
-  align-self: center;
+export const InputDiv = styled.div<InputDiv>`
+  align-self: ${(props) => (props.position === "center" ? "center" : "left")};
   width: 350px;
   height: 30px;
   border: 1px solid #eeeeee;
@@ -57,6 +61,12 @@ export const InputDiv = styled.div`
       outline: none;
     }
   }
+`;
+export const ErrorDiv = styled.div`
+  font-size: 0.5rem;
+  color: #f03f35;
+  font-weight: bold;
+  margin-left: 60px;
 `;
 
 export const ButtonContainer = styled.div`
