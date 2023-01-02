@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-warning-comments
 // TODO input 컴포넌트 분리 리팩토링
 
+import axios from "axios";
 import { useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import AppButton from "../../components/AppButton/AppButton";
@@ -29,6 +30,17 @@ const Register = () => {
   passwordRef.current = watch("password");
 
   const onSubmitHandler: SubmitHandler<UserInfo> = (data) => {
+    const email = data.email;
+    const password = data.password;
+    const newData = { email, password };
+    axios
+      .post("http://localhost:8080/users/create", newData)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error.data);
+      });
     console.log(data);
   };
   return (
