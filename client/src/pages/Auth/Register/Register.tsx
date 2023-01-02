@@ -18,6 +18,7 @@ import {
   ButtonContainer,
   InputContainer,
 } from "./RegisterStyle";
+import DB_DOMAIN_URL from "../../../utils/DB_DOMAIN_URL";
 
 const Register = () => {
   const {
@@ -37,7 +38,7 @@ const Register = () => {
     const password = data.password;
     const newData = { email, password };
     axios
-      .post("http://localhost:8080/users/create", newData)
+      .post(`${DB_DOMAIN_URL}users/create`, newData)
       .then((res) => {
         console.log(res.data);
         navigate("/login");
