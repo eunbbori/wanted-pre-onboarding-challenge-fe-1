@@ -4,9 +4,9 @@
 import axios from "axios";
 import { useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import AppButton from "../../components/AppButton/AppButton";
-import AppLabel from "../../components/AppLabel/AppLabel";
-import { UserInfo } from "../../type/userInfo";
+import AppButton from "../../../components/AppButton/AppButton";
+import AppLabel from "../../../components/AppLabel/AppLabel";
+import { UserInfo } from "../../../type/userInfo";
 import {
   Container,
   Title,
