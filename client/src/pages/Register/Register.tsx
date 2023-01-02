@@ -105,7 +105,7 @@ const Register = () => {
             <AppLabel htmlFor="password" text="Password" />
             <input
               id="password"
-              {...register("password", { required: true, minLength: 6 })}
+              {...register("password", { required: true, minLength: 8 })}
               type="password"
             />
           </InputDiv>
@@ -116,7 +116,7 @@ const Register = () => {
             {errors.password &&
               // eslint-disable-next-line no-warning-comments
               errors.password.type === "minLength" && ( // TODO 대소문자,특수문자 섞어서
-                <div>비밀번호는 최소 6글자 입력해야합니다</div>
+                <div>비밀번호는 최소 8글자 입력해야합니다</div>
               )}
           </ErrorDiv>
           <InputDiv position="center">

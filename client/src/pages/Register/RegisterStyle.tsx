@@ -11,16 +11,17 @@ export const Container = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: ${Theme.color.color3};
   padding: 30px;
   display: flex;
+  font-family: "Secular One", sans-serif;
+  font-family: "Galmuri14";
 `;
 
 export const TitleContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
-  margin-top: 20px;
+  margin-bottom: 40px;
+  margin-top: 40px;
 `;
 
 export const Title = styled.p`
@@ -40,7 +41,6 @@ export const FormContainer = styled.form`
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
 `;
 export const InputDiv = styled.div<InputDiv>`
   align-self: ${(props) => (props.position === "center" ? "center" : "left")};
@@ -65,12 +65,13 @@ export const InputDiv = styled.div<InputDiv>`
 
 export const ErrorDiv = styled.div`
   font-size: 0.5rem;
-  color: red;
+  color: #f03f35;
   font-weight: bold;
   margin-left: 60px;
 `;
 
 export const ButtonContainer = styled.div`
+  font-family: "Secular One", sans-serif;
   text-align: center;
   margin-top: 40px;
 `;
