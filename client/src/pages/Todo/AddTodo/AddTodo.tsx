@@ -1,6 +1,9 @@
+import axios from "axios";
 import { useForm, SubmitHandler } from "react-hook-form";
 import AppButton from "../../../components/AppButton/AppButton";
 import { TodoInfo } from "../../../type/todoInfo";
+import { useNavigate } from "react-router-dom";
+import DB_DOMAIN_URL from "../../../utils/DB_DOMAIN_URL";
 
 import {
   Container,
@@ -17,25 +20,33 @@ const AddTodo = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<TodoInfo>();
+
+  const navigate = useNavigate();
 
   const onSubmitHandler: SubmitHandler<TodoInfo> = async (data) => {
     const title = data.title;
     const content = data.content;
     const newData = { title, content };
-    console.log(newData);
-    // const res = await axios.post(`${DB_DOMAIN_URL}/users/create`, newData);
-    // try {
-    //   if (res.status === 200) {
-    //     navigate("/login");
-    //   } else {
-    //     alert(res.data.details);
-    //   }
-    // } catch (error) {
-    //   alert(error);
+    const token = localStorage.getItem("login-token");
+    const res = await axios.post(`${DB_DOMAIN_URL}/todos`, newData, {
+      headers: { Authorization: token },
+    });
+    // if (!localStorage.getItem("login-token")) {
+    //   alert("로그인을 해주시기 바랍니다");
+    //   navigate("/auth/login");
     // }
+    try {
+      if (res.status === 200) {
+        navigate("/");
+      } else {
+        // alert("로그인을 해주시기 바랍니다");
+        alert(res.data.details);
+      }
+    } catch (error) {
+      alert(error);
+    }
   };
   return (
     <Container>
