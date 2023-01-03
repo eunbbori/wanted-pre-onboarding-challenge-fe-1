@@ -1,4 +1,5 @@
 import { GrAddCircle } from "react-icons/gr";
+import ListTodo from "./components/ListTodo";
 import {
   Container,
   MainTodoContainer,
@@ -24,7 +25,7 @@ const MainTodo = () => {
           </SubTitleContainer>
         </TitleContainer>
         <ListTodoContainer>
-          ListTodo 컴포넌트 삽입
+          <ListTodo />
           <MainAppButton
             width={"60px"}
             className={"addBtn"}

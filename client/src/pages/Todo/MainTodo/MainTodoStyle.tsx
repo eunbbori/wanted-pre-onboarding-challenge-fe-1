@@ -78,6 +78,8 @@ export const Separator = styled.hr`
 // `;
 
 export const MainAppButton = styled(AppButton)`
+  position: absolute;
+  right: 26vw;
   font-size: 3rem;
   height: 60px;
   font-family: "Secular One", sans-serif;
@@ -87,6 +89,7 @@ export const MainAppButton = styled(AppButton)`
   align-self: end;
   margin-bottom: 10px;
   border: none;
+
   &:hover {
     background-color: ${Theme.color.color3};
   }
