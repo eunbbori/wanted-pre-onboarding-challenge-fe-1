@@ -11,7 +11,6 @@ export const Container = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  padding: 30px;
   display: flex;
   font-family: "Secular One", sans-serif;
   font-family: "Galmuri14";
