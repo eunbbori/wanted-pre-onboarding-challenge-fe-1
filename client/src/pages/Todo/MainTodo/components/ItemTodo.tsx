@@ -11,14 +11,18 @@ import {
   DeleteBtn,
 } from "./ItemTodoStyle";
 
-const ItemTodo = () => {
+interface TodoTitleProps {
+  title: string;
+}
+
+const ItemTodo: React.FC<TodoTitleProps> = ({ title }) => {
   return (
     <Container>
       <CheckBoxDiv>
         <CheckBox type="checkbox" />
       </CheckBoxDiv>
       <TaskDiv>
-        <p>Task1</p>
+        <p>{title}</p>
       </TaskDiv>
       <ViewBtnContainer>
         <ViewBtn type="button">
