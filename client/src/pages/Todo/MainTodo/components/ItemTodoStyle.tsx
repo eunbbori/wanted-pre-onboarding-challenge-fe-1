@@ -43,6 +43,10 @@ export const ViewBtn = styled.button`
   font-size: 2rem;
   border: 1px solid ${Theme.color.color3};
   cursor: pointer;
+  border-radius: 10px;
+  &:hover {
+    background-color: ${Theme.color.color2};
+  }
 `;
 
 export const DeleteBtnContainer = styled.div`
@@ -55,4 +59,8 @@ export const DeleteBtn = styled.button`
   font-size: 2rem;
   border: 1px solid ${Theme.color.color3};
   cursor: pointer;
+  border-radius: 10px;
+  &:hover {
+    background-color: ${Theme.color.color4};
+  }
 `;
