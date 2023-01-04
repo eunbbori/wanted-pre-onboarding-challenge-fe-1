@@ -1,5 +1,7 @@
 import { GiMagnifyingGlass } from "react-icons/gi";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { useNavigate } from "react-router";
+
 import {
   Container,
   CheckBoxDiv,
@@ -12,20 +14,26 @@ import {
 } from "./ItemTodoStyle";
 
 interface TodoTitleProps {
-  title: string;
+  task: any;
 }
 
-const ItemTodo: React.FC<TodoTitleProps> = ({ title }) => {
+const ItemTodo: React.FC<TodoTitleProps> = ({ task }) => {
+  const navigate = useNavigate();
+
+  const viewHandler = () => {
+    navigate(`/todo/${task.id}`);
+  };
+
   return (
     <Container>
       <CheckBoxDiv>
         <CheckBox type="checkbox" />
       </CheckBoxDiv>
       <TaskDiv>
-        <p>{title}</p>
+        <p>{task.title}</p>
       </TaskDiv>
       <ViewBtnContainer>
-        <ViewBtn type="button">
+        <ViewBtn type="button" onClick={viewHandler}>
           <GiMagnifyingGlass />
         </ViewBtn>
       </ViewBtnContainer>

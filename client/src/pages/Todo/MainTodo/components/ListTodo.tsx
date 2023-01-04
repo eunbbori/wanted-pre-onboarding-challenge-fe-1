@@ -19,7 +19,7 @@ const ListTodo = () => {
   return (
     <div>
       {tasks.map((task: any, idx) => (
-        <ItemTodo title={task.title} key={idx} />
+        <ItemTodo task={task} key={idx} />
       ))}
     </div>
   );
