@@ -1,4 +1,5 @@
 import { GrAddCircle } from "react-icons/gr";
+import { useNavigate } from "react-router-dom";
 import ListTodo from "./components/ListTodo";
 import {
   Container,
@@ -13,6 +14,11 @@ import {
 } from "./MainTodoStyle";
 
 const MainTodo = () => {
+  const navigate = useNavigate();
+  const addHandler = () => {
+    navigate("todo/create");
+  };
+
   return (
     <Container>
       <MainTodoContainer>
@@ -31,6 +37,7 @@ const MainTodo = () => {
             className={"addBtn"}
             type={"button"}
             text={<GrAddCircle />}
+            onClick={addHandler}
           />
         </ListTodoContainer>
         <Separator />
