@@ -1,5 +1,6 @@
-import { GrAddCircle } from "react-icons/gr";
+import { BsFillPencilFill, BsFillPlusCircleFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import DetailTodo from "./components/DetailTodo";
 import ListTodo from "./components/ListTodo";
 import {
   Container,
@@ -10,7 +11,8 @@ import {
   ListTodoContainer,
   DetailTodoContainer,
   Separator,
-  MainAppButton,
+  MainAddButton,
+  MainEditButton,
 } from "./MainTodoStyle";
 
 const MainTodo = () => {
@@ -32,16 +34,24 @@ const MainTodo = () => {
         </TitleContainer>
         <ListTodoContainer>
           <ListTodo />
-          <MainAppButton
+          <MainAddButton
             width={"60px"}
             className={"addBtn"}
             type={"button"}
-            text={<GrAddCircle />}
+            text={<BsFillPlusCircleFill />}
             onClick={addHandler}
           />
         </ListTodoContainer>
         <Separator />
-        <DetailTodoContainer>DetailTodo 컴포넌트 삽입</DetailTodoContainer>
+        <DetailTodoContainer>
+          <DetailTodo />
+          <MainEditButton
+            width={"60px"}
+            className={"editBtn"}
+            type={"button"}
+            text={<BsFillPencilFill />}
+          />
+        </DetailTodoContainer>
       </MainTodoContainer>
     </Container>
   );
