@@ -1,6 +1,6 @@
 import { Container, TitleContainer, ContentContainer } from "./DetailTodoStyle";
 import { useParams } from "react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DB_DOMAIN_URL from "../../../../utils/DB_DOMAIN_URL";
 import axios from "axios";
 
@@ -9,13 +9,16 @@ const DetailTodo = () => {
   const { id } = useParams();
   const token = localStorage.getItem("login-token");
 
-  axios
-    .get(`${DB_DOMAIN_URL}/todos/${id}`, {
-      headers: { Authorization: token },
-    })
-    .then((response) => {
-      setTask(response.data.data);
-    });
+  useEffect(() => {
+    axios
+      .get(`${DB_DOMAIN_URL}/todos/${id}`, {
+        headers: { Authorization: token },
+      })
+      .then((response) => {
+        setTask(response.data.data);
+      });
+  }, [id, token]);
+
   return (
     <Container>
       <TitleContainer>
