@@ -30,7 +30,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   if (localStorage.getItem("login-token")) {
-    navigate("/");
+    navigate("/todo");
   }
 
   const onSubmitHandler: SubmitHandler<UserInfo> = async (data) => {
@@ -41,12 +41,14 @@ const Login = () => {
       const res = await axios.post(`${DB_DOMAIN_URL}/users/login`, loginData);
       if (res.status === 200) {
         localStorage.setItem("login-token", res.data.token);
-        navigate("/");
+        navigate("/todo");
       } else {
+        // alert("이메일 또는 비밀번호가 틀립니다.");
         alert(res.data.details);
       }
     } catch (error) {
-      alert(error);
+      alert("이메일 또는 비밀번호가 틀립니다.");
+      // alert(error);
     }
   };
   return (

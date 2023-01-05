@@ -39,7 +39,7 @@ const AddTodo = () => {
     // }
     try {
       if (res.status === 200) {
-        navigate("/");
+        navigate("/todo");
       } else {
         // alert("로그인을 해주시기 바랍니다");
         alert(res.data.details);

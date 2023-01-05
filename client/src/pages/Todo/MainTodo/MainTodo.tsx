@@ -18,7 +18,7 @@ import {
 const MainTodo = () => {
   const navigate = useNavigate();
   const addHandler = () => {
-    navigate("todo/create");
+    navigate("/todo/create");
   };
 
   return (
