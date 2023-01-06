@@ -94,22 +94,3 @@ export const MainAddButton = styled(AppButton)`
     background-color: ${Theme.color.color3};
   }
 `;
-
-export const MainEditButton = styled(AppButton)`
-  position: absolute;
-  right: 26vw;
-  bottom: 7vh;
-  font-size: 3rem;
-  height: 60px;
-  font-family: "Secular One", sans-serif;
-  border-radius: 50%;
-  background: ${Theme.color.color2};
-  line-height: inherit;
-  align-self: end;
-  margin-bottom: 10px;
-  border: none;
-
-  &:hover {
-    background-color: ${Theme.color.color3};
-  }
-`;

@@ -8,13 +8,18 @@ import {
   TitleContainer,
   ContentContainer,
   MainEditButton,
+  CancelButton,
+  SaveButton,
 } from "./DetailTodoStyle";
 
 const DetailTodo = () => {
   const [task, setTask] = useState({ title: "title", content: "content" });
+  const [editMode, setEditMode] = useState(false);
   const { id } = useParams();
   const token = localStorage.getItem("login-token");
-
+  const editHandler = () => {
+    setEditMode(true);
+  };
   useEffect(() => {
     axios
       .get(`${DB_DOMAIN_URL}/todos/${id}`, {
@@ -37,12 +42,31 @@ const DetailTodo = () => {
           value={task.content}
         />
       </ContentContainer>
-      <MainEditButton
-        width={"60px"}
-        className={"editBtn"}
-        type={"button"}
-        text={<BsFillPencilFill />}
-      />
+      {!editMode && (
+        <MainEditButton
+          width={"60px"}
+          className={"editBtn"}
+          type={"button"}
+          text={<BsFillPencilFill />}
+          onClick={editHandler}
+        />
+      )}
+      {editMode && (
+        <CancelButton
+          width={"60px"}
+          className={"editBtn"}
+          type={"button"}
+          text={"CANCEL"}
+        />
+      )}
+      {editMode && (
+        <SaveButton
+          width={"60px"}
+          className={"editBtn"}
+          type={"button"}
+          text={"SAVE"}
+        />
+      )}
     </Container>
   );
 };

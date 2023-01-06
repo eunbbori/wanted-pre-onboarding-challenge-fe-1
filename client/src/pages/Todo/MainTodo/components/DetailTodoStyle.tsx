@@ -21,7 +21,7 @@ export const TitleContainer = styled.div`
   }
 `;
 export const ContentContainer = styled.div`
-  width: 42vw;
+  width: 40vw;
   height: 9vh;
   border: 3px solid ${Theme.color.color4};
   border-radius: 10px;
@@ -55,6 +55,43 @@ export const MainEditButton = styled(AppButton)`
   margin-bottom: 10px;
   border: none;
 
+  &:hover {
+    background-color: ${Theme.color.color3};
+  }
+`;
+
+export const SaveButton = styled(AppButton)`
+  position: absolute;
+  right: 25.5vw;
+  bottom: 14vh;
+  font-size: 1.5rem;
+  width: 110px;
+  height: 60px;
+  font-family: "Secular One", sans-serif;
+  border-radius: 15px;
+  background: ${Theme.color.color1};
+  line-height: inherit;
+  align-self: end;
+  margin-bottom: 15px;
+  border: none;
+
+  &:hover {
+    background-color: ${Theme.color.color3};
+  }
+`;
+export const CancelButton = styled(AppButton)`
+  position: absolute;
+  right: 25.5vw;
+  bottom: 7vh;
+  font-size: 1.5rem;
+  width: 110px;
+  height: 60px;
+  font-family: "Secular One", sans-serif;
+  border-radius: 15px;
+  background: ${Theme.color.color1};
+  line-height: inherit;
+  align-self: end;
+  border: none;
   &:hover {
     background-color: ${Theme.color.color3};
   }
