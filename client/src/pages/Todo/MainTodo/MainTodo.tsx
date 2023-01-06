@@ -1,4 +1,4 @@
-import { BsFillPencilFill, BsFillPlusCircleFill } from "react-icons/bs";
+import { BsFillPlusCircleFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import DetailTodo from "./components/DetailTodo";
 import ListTodo from "./components/ListTodo";
@@ -12,7 +12,6 @@ import {
   DetailTodoContainer,
   Separator,
   MainAddButton,
-  MainEditButton,
 } from "./MainTodoStyle";
 
 const MainTodo = () => {
@@ -45,12 +44,6 @@ const MainTodo = () => {
         <Separator />
         <DetailTodoContainer>
           <DetailTodo />
-          <MainEditButton
-            width={"60px"}
-            className={"editBtn"}
-            type={"button"}
-            text={<BsFillPencilFill />}
-          />
         </DetailTodoContainer>
       </MainTodoContainer>
     </Container>

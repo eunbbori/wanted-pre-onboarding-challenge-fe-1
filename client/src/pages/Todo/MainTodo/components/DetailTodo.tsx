@@ -1,8 +1,14 @@
-import { Container, TitleContainer, ContentContainer } from "./DetailTodoStyle";
 import { useParams } from "react-router";
 import { useState, useEffect } from "react";
 import DB_DOMAIN_URL from "../../../../utils/DB_DOMAIN_URL";
 import axios from "axios";
+import { BsFillPencilFill } from "react-icons/bs";
+import {
+  Container,
+  TitleContainer,
+  ContentContainer,
+  MainEditButton,
+} from "./DetailTodoStyle";
 
 const DetailTodo = () => {
   const [task, setTask] = useState({ title: "title", content: "content" });
@@ -22,11 +28,21 @@ const DetailTodo = () => {
   return (
     <Container>
       <TitleContainer>
-        <p>{task.title}</p>
+        <input type="text" value={task.title} readOnly />
       </TitleContainer>
       <ContentContainer>
-        <p>{task.content}</p>
+        <textarea
+          style={{ width: "100%", height: "100%" }}
+          readOnly
+          value={task.content}
+        />
       </ContentContainer>
+      <MainEditButton
+        width={"60px"}
+        className={"editBtn"}
+        type={"button"}
+        text={<BsFillPencilFill />}
+      />
     </Container>
   );
 };
