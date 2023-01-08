@@ -1,26 +1,14 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import ItemTodo from "./ItemTodo";
-import DB_DOMAIN_URL from "../../../../utils/DB_DOMAIN_URL";
+import { Task } from "../../../../type/tasks";
+import { useGetAllTaskListQuery } from "../../../../features/task/taskApi";
 
 const ListTodo = () => {
-  const [tasks, setTasks] = useState([]);
-  const token = localStorage.getItem("login-token");
-  useEffect(() => {
-    axios
-      .get(`${DB_DOMAIN_URL}/todos`, {
-        headers: { Authorization: token },
-      })
-      .then((response) => {
-        setTasks(response.data.data);
-      });
-  }, [token]);
+  const { data } = useGetAllTaskListQuery({});
 
   return (
     <div>
-      {tasks.map((task: any, idx) => (
-        <ItemTodo task={task} key={idx} />
-      ))}
+      {data &&
+        data.data.map((task: Task, idx) => <ItemTodo task={task} key={idx} />)}
     </div>
   );
 };
