@@ -1,9 +1,8 @@
-import axios from "axios";
-import { useState } from "react";
+import { useEffect } from "react";
 import { GiMagnifyingGlass } from "react-icons/gi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useNavigate } from "react-router";
-import DB_DOMAIN_URL from "../../../../utils/DB_DOMAIN_URL";
+import { useDeleteTaskMutation } from "../../../../features/task/taskApi";
 
 import {
   Container,
@@ -22,20 +21,22 @@ interface TodoTitleProps {
 
 const ItemTodo: React.FC<TodoTitleProps> = ({ task }) => {
   const navigate = useNavigate();
-  const token = localStorage.getItem("login-token");
+
+  const [onDeleteTask, { isError: isErrorDeleteTask }] =
+    useDeleteTaskMutation();
+
+  useEffect(() => {
+    if (isErrorDeleteTask) {
+      alert("삭제 실패.");
+    }
+  }, [isErrorDeleteTask]);
 
   const viewHandler = () => {
     navigate(`/todo/${task.id}`);
   };
 
   const deleteHandler = () => {
-    axios
-      .delete(`${DB_DOMAIN_URL}/todos/${task.id}`, {
-        headers: { Authorization: token },
-      })
-      .then(() => {
-        window.location.reload();
-      });
+    onDeleteTask(task.id);
   };
 
   return (
