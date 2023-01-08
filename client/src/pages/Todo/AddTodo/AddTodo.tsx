@@ -1,9 +1,7 @@
-import axios from "axios";
 import { useForm, SubmitHandler } from "react-hook-form";
 import AppButton from "../../../components/AppButton/AppButton";
 import { TodoInfo } from "../../../type/todoInfo";
 import { useNavigate } from "react-router-dom";
-import DB_DOMAIN_URL from "../../../utils/DB_DOMAIN_URL";
 
 import {
   Container,
@@ -15,6 +13,8 @@ import {
   ErrorDiv,
   ButtonContainer,
 } from "./AddTodoStyle";
+import { useCreateTaskMutation } from "../../../features/task/taskApi";
+import { Task } from "../../../type/tasks";
 
 const AddTodo = () => {
   const {
@@ -23,30 +23,25 @@ const AddTodo = () => {
     formState: { errors },
   } = useForm<TodoInfo>();
 
+  const [createTask] = useCreateTaskMutation();
+
   const navigate = useNavigate();
 
   const onSubmitHandler: SubmitHandler<TodoInfo> = async (data) => {
     const title = data.title;
     const content = data.content;
-    const newData = { title, content };
-    const token = localStorage.getItem("login-token");
-    const res = await axios.post(`${DB_DOMAIN_URL}/todos`, newData, {
-      headers: { Authorization: token },
-    });
-    // if (!localStorage.getItem("login-token")) {
-    //   alert("로그인을 해주시기 바랍니다");
-    //   navigate("/auth/login");
-    // }
-    try {
-      if (res.status === 200) {
+    const newTask: Task = {
+      title: title,
+      content: content,
+    };
+
+    createTask(newTask)
+      .then(() => {
         navigate("/todo");
-      } else {
-        // alert("로그인을 해주시기 바랍니다");
-        alert(res.data.details);
-      }
-    } catch (error) {
-      alert(error);
-    }
+      })
+      .catch(() => {
+        alert("에러가 발생하였습니다. 관리자에게 문의해주세요.");
+      });
   };
   return (
     <Container>
