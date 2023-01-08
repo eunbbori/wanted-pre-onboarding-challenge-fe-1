@@ -1,4 +1,5 @@
-import { BsFillPlusCircleFill } from "react-icons/bs";
+import { BsFillPlusCircleFill, BsPersonPlusFill } from "react-icons/bs";
+import { BiLogInCircle, BiLogOutCircle } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import DetailTodo from "./components/DetailTodo";
 import ListTodo from "./components/ListTodo";
@@ -12,12 +13,33 @@ import {
   DetailTodoContainer,
   Separator,
   MainAddButton,
+  MainRegisterButton,
+  MainLoginButton,
+  MainLogOutButton,
 } from "./MainTodoStyle";
 
 const MainTodo = () => {
   const navigate = useNavigate();
+  const token = localStorage.getItem("login-token");
+
   const addHandler = () => {
+    if (!token) {
+      alert("로그인을 해주시기 바랍니다.");
+      return;
+    }
     navigate("/todo/create");
+  };
+
+  const RegisterHandler = () => {
+    navigate("/auth/register");
+  };
+  const LoginHandler = () => {
+    navigate("/auth/login");
+  };
+  const LogoutHandler = () => {
+    localStorage.removeItem("login-token");
+    window.location.reload();
+    navigate("/");
   };
 
   return (
@@ -26,6 +48,33 @@ const MainTodo = () => {
         <TitleContainer>
           <MainTitleContainer>
             <p>ToDoList</p>
+            {!token && (
+              <MainLoginButton
+                width={"60px"}
+                className={"loginBtn"}
+                type={"button"}
+                text={<BiLogInCircle />}
+                onClick={LoginHandler}
+              />
+            )}
+            {!token && (
+              <MainRegisterButton
+                width={"60px"}
+                className={"registerBtn"}
+                type={"button"}
+                text={<BsPersonPlusFill />}
+                onClick={RegisterHandler}
+              />
+            )}
+            {token && (
+              <MainLogOutButton
+                width={"60px"}
+                className={"logoutBtn"}
+                type={"button"}
+                text={<BiLogOutCircle />}
+                onClick={LogoutHandler}
+              />
+            )}
           </MainTitleContainer>
           <SubTitleContainer>
             <p>Check your Lists</p>

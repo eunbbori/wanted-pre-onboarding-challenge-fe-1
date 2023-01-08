@@ -94,3 +94,56 @@ export const MainAddButton = styled(AppButton)`
     background-color: ${Theme.color.color3};
   }
 `;
+
+export const MainRegisterButton = styled(AppButton)`
+  position: absolute;
+  right: 26vw;
+  font-size: 2rem;
+  height: 60px;
+  font-family: "Secular One", sans-serif;
+  border-radius: 50%;
+  background: ${Theme.color.color2};
+  line-height: inherit;
+  align-self: end;
+  margin-bottom: 10px;
+  border: none;
+
+  &:hover {
+    background-color: ${Theme.color.color3};
+  }
+`;
+
+export const MainLoginButton = styled(AppButton)`
+  position: absolute;
+  right: 30vw;
+  font-size: 2rem;
+  height: 60px;
+  font-family: "Secular One", sans-serif;
+  border-radius: 50%;
+  background: ${Theme.color.color2};
+  line-height: inherit;
+  align-self: end;
+  margin-bottom: 10px;
+  border: none;
+
+  &:hover {
+    background-color: ${Theme.color.color3};
+  }
+`;
+export const MainLogOutButton = styled(AppButton)`
+  position: absolute;
+  right: 26vw;
+  font-size: 2rem;
+  height: 60px;
+  font-family: "Secular One", sans-serif;
+  border-radius: 50%;
+  background: ${Theme.color.color2};
+  line-height: inherit;
+  align-self: end;
+  margin-bottom: 10px;
+  border: none;
+
+  &:hover {
+    background-color: ${Theme.color.color3};
+  }
+`;
