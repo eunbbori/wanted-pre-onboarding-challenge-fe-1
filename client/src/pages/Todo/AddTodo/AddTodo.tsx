@@ -37,7 +37,7 @@ const AddTodo = () => {
 
     createTask(newTask)
       .then(() => {
-        navigate("/todo");
+        navigate("/");
       })
       .catch(() => {
         alert("에러가 발생하였습니다. 관리자에게 문의해주세요.");

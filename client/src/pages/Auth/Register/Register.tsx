@@ -40,7 +40,7 @@ const Register = () => {
     const res = await axios.post(`${DB_DOMAIN_URL}/users/create`, newData);
     try {
       if (res.status === 200) {
-        navigate("/login");
+        navigate("/auth/login");
       } else {
         alert(res.data.details);
       }
