@@ -22,6 +22,9 @@ const DetailTodo = () => {
   const editHandler = () => {
     setEditMode(true);
     setReadOnly(false);
+    if (titleRef.current) {
+      titleRef.current.focus();
+    }
   };
   const cancelAndSaveHandler = () => {
     setEditMode(false);
