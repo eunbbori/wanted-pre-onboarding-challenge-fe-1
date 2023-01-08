@@ -43,7 +43,7 @@ const Register = () => {
         navigate("/auth/login");
       } else {
         alert(res.data.details);
-      }
+      } //TODO 409 이미존재하는 유저입니다
     } catch (error) {
       alert(error);
     }

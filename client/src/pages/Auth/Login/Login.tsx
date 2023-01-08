@@ -41,8 +41,8 @@ const Login = () => {
       const res = await axios.post(`${DB_DOMAIN_URL}/users/login`, loginData);
       if (res.status === 200) {
         localStorage.setItem("login-token", res.data.token);
-        window.location.reload();
         navigate("/");
+        window.location.reload();
       } else {
         // alert("이메일 또는 비밀번호가 틀립니다.");
         alert(res.data.details);
