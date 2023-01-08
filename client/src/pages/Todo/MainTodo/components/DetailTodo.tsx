@@ -1,8 +1,10 @@
 import { useParams } from "react-router";
-import { useState, useEffect, useRef } from "react";
-import DB_DOMAIN_URL from "../../../../utils/DB_DOMAIN_URL";
-import axios from "axios";
+import { useState, useRef, useEffect } from "react";
 import { BsFillPencilFill } from "react-icons/bs";
+import {
+  useGetDetailTaskQuery,
+  useUpdateTodoDetailMutation,
+} from "../../../../features/task/taskApi";
 import {
   Container,
   TitleContainer,
@@ -11,14 +13,13 @@ import {
   CancelButton,
   SaveButton,
 } from "./DetailTodoStyle";
+import { Task } from "../../../../type/tasks";
 
 const DetailTodo = () => {
   const titleRef = useRef<HTMLInputElement>(null);
   const contentRef = useRef<HTMLTextAreaElement>(null);
   const [editMode, setEditMode] = useState(false);
   const [readOnly, setReadOnly] = useState(true);
-  const { id } = useParams();
-  const token = localStorage.getItem("login-token");
   const editHandler = () => {
     setEditMode(true);
     setReadOnly(false);
@@ -26,23 +27,46 @@ const DetailTodo = () => {
       titleRef.current.focus();
     }
   };
-  const cancelAndSaveHandler = () => {
+
+  const cancelHandler = () => {
     setEditMode(false);
     setReadOnly(true);
+    if (titleRef.current && contentRef.current && data) {
+      titleRef.current.value = data.data.title;
+      contentRef.current.value = data.data.content;
+    }
   };
 
+  const saveHandler = () => {
+    setEditMode(false);
+    setReadOnly(true);
+
+    if (
+      titleRef.current?.value === "" ||
+      contentRef.current?.value === "" ||
+      !id
+    ) {
+      return;
+    }
+
+    const updateTask: Task = {
+      title: titleRef.current?.value || "",
+      content: contentRef.current?.value || "",
+      id: id,
+    };
+    onUpdateTask(updateTask);
+  };
+
+  const { id } = useParams();
+  const { data } = useGetDetailTaskQuery(id);
+  const [onUpdateTask] = useUpdateTodoDetailMutation();
+
   useEffect(() => {
-    axios
-      .get(`${DB_DOMAIN_URL}/todos/${id}`, {
-        headers: { Authorization: token },
-      })
-      .then((response) => {
-        if (titleRef.current && contentRef.current) {
-          titleRef.current.value = response.data.data.title;
-          contentRef.current.value = response.data.data.content;
-        }
-      });
-  }, [id, token]);
+    if (titleRef.current && contentRef.current && data) {
+      titleRef.current.value = data.data.title;
+      contentRef.current.value = data.data.content;
+    }
+  }, [data]);
 
   return (
     <Container>
@@ -50,7 +74,7 @@ const DetailTodo = () => {
         <input
           type="text"
           name="title"
-          defaultValue="title"
+          defaultValue="TITLE"
           readOnly={readOnly}
           ref={titleRef}
         />
@@ -59,7 +83,7 @@ const DetailTodo = () => {
         <textarea
           style={{ width: "100%", height: "100%" }}
           readOnly={readOnly}
-          defaultValue="content"
+          defaultValue="CONTENT"
           name="content"
           ref={contentRef}
         />
@@ -79,7 +103,7 @@ const DetailTodo = () => {
           className={"editBtn"}
           type={"button"}
           text={"CANCEL"}
-          onClick={cancelAndSaveHandler}
+          onClick={cancelHandler}
         />
       )}
       {editMode && (
@@ -88,7 +112,7 @@ const DetailTodo = () => {
           className={"editBtn"}
           type={"button"}
           text={"SAVE"}
-          onClick={cancelAndSaveHandler}
+          onClick={saveHandler}
         />
       )}
     </Container>
