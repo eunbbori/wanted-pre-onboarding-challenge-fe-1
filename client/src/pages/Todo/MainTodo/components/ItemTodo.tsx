@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { GiMagnifyingGlass } from "react-icons/gi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useNavigate } from "react-router";
+import AppAlertDialog from "../../../../components/AppDialog/AppAlertDialog";
 import { useDeleteTaskMutation } from "../../../../features/task/taskApi";
 
 import {
@@ -21,6 +22,7 @@ interface TodoTitleProps {
 
 const ItemTodo: React.FC<TodoTitleProps> = ({ task }) => {
   const navigate = useNavigate();
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const [onDeleteTask, { isError: isErrorDeleteTask }] =
     useDeleteTaskMutation();
@@ -36,7 +38,16 @@ const ItemTodo: React.FC<TodoTitleProps> = ({ task }) => {
   };
 
   const deleteHandler = () => {
+    setDialogOpen(true);
+  };
+
+  const handleClose = () => {
+    setDialogOpen(false);
+  };
+
+  const handleDeleteAgree = () => {
     onDeleteTask(task.id);
+    setDialogOpen(false);
   };
 
   return (
@@ -56,6 +67,15 @@ const ItemTodo: React.FC<TodoTitleProps> = ({ task }) => {
         <DeleteBtn type="button" onClick={deleteHandler}>
           <RiDeleteBin6Line />
         </DeleteBtn>
+        <AppAlertDialog
+          AlertText={"선택한 항목을 삭제하시겠습니까?"}
+          AlertDescription={"한 번 삭제된 항목은 되돌릴 수 없습니다."}
+          DisagreeText={"취소"}
+          AgreeText={"삭제"}
+          openState={dialogOpen}
+          handleClose={handleClose}
+          handleAgree={handleDeleteAgree}
+        />
       </DeleteBtnContainer>
     </Container>
   );
