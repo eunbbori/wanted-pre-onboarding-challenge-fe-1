@@ -7,7 +7,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import AppButton from "../../../components/AppButton/AppButton";
 import AppLabel from "../../../components/AppLabel/AppLabel";
 import { UserInfo } from "../../../type/userInfo";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Container,
   Title,
@@ -19,6 +19,7 @@ import {
   InputContainer,
 } from "./RegisterStyle";
 import DB_DOMAIN_URL from "../../../utils/DB_DOMAIN_URL";
+import EMAIL_VALIDATION from "../../../utils/EMAIL_VALIDATION";
 
 const Register = () => {
   const {
@@ -105,7 +106,7 @@ const Register = () => {
               id="email"
               {...register("email", {
                 required: true,
-                pattern: /[^\s@]+@[^\s@]+\.[^\s@]+/,
+                pattern: EMAIL_VALIDATION,
               })}
               type="email"
             />

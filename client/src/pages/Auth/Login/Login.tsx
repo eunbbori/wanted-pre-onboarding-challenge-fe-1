@@ -5,7 +5,7 @@ import axios from "axios";
 import { useForm, SubmitHandler } from "react-hook-form";
 import AppButton from "../../../components/AppButton/AppButton";
 import AppLabel from "../../../components/AppLabel/AppLabel";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DB_DOMAIN_URL from "../../../utils/DB_DOMAIN_URL";
 import { UserInfo } from "../../../type/userInfo";
 
@@ -19,6 +19,7 @@ import {
   ButtonContainer,
   InputContainer,
 } from "./LoginStyle";
+import EMAIL_VALIDATION from "../../../utils/EMAIL_VALIDATION";
 
 const Login = () => {
   const {
@@ -65,7 +66,7 @@ const Login = () => {
               id="email"
               {...register("email", {
                 required: true,
-                pattern: /[^\s@]+@[^\s@]+\.[^\s@]+/,
+                pattern: EMAIL_VALIDATION,
               })}
               type="email"
             />
