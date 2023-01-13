@@ -1,5 +1,6 @@
 import ItemTodo from "./ItemTodo";
-import { Task } from "../../../../type/tasks";
+import { TodoInfo } from "./../../../../type/todoInfo";
+
 import { useGetAllTaskListQuery } from "../../../../features/task/taskApi";
 
 const ListTodo = () => {
@@ -8,7 +9,9 @@ const ListTodo = () => {
   return (
     <div>
       {data &&
-        data.data.map((task: Task, idx) => <ItemTodo task={task} key={idx} />)}
+        data.data.map((task: TodoInfo, idx) => (
+          <ItemTodo task={task} key={idx} />
+        ))}
     </div>
   );
 };

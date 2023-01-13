@@ -13,7 +13,7 @@ import {
   CancelButton,
   SaveButton,
 } from "./DetailTodoStyle";
-import { Task } from "../../../../type/tasks";
+import { TodoInfo } from "./../../../../type/todoInfo";
 
 const DetailTodo = () => {
   const titleRef = useRef<HTMLInputElement>(null);
@@ -49,7 +49,7 @@ const DetailTodo = () => {
       return;
     }
 
-    const updateTask: Task = {
+    const updateTask: TodoInfo = {
       title: titleRef.current?.value || "",
       content: contentRef.current?.value || "",
       id: id,

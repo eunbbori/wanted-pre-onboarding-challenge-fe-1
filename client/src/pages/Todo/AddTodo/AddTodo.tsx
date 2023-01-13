@@ -14,7 +14,6 @@ import {
   ButtonContainer,
 } from "./AddTodoStyle";
 import { useCreateTaskMutation } from "../../../features/task/taskApi";
-import { Task } from "../../../type/tasks";
 
 const AddTodo = () => {
   const {
@@ -30,7 +29,7 @@ const AddTodo = () => {
   const onSubmitHandler: SubmitHandler<TodoInfo> = async (data) => {
     const title = data.title;
     const content = data.content;
-    const newTask: Task = {
+    const newTask: TodoInfo = {
       title: title,
       content: content,
     };

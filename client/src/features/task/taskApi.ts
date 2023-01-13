@@ -1,5 +1,5 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { Task } from "../../type/tasks";
+import { TodoInfo } from "../../type/todoInfo";
 import DB_DOMAIN_URL from "../../utils/DB_DOMAIN_URL";
 import { authAxiosBaseQuery } from "./axiosBaseQuery";
 
@@ -11,7 +11,7 @@ export const taskApi = createApi({
   }),
   endpoints: (builder) => ({
     //전체 todoList 불러옴
-    getAllTaskList: builder.query<{ data: Task[] }, Record<string, never>>({
+    getAllTaskList: builder.query<{ data: TodoInfo[] }, Record<string, never>>({
       query: () => {
         return {
           url: "/todos",
@@ -31,7 +31,7 @@ export const taskApi = createApi({
           : ["Task"],
     }),
     //id에 해당하는 todoDetail을 불러옴
-    getDetailTask: builder.query<{ data: Task }, string | undefined>({
+    getDetailTask: builder.query<{ data: TodoInfo }, string | undefined>({
       query: (id) => ({
         url: `/todos/${id}`,
         method: "GET",
@@ -39,7 +39,7 @@ export const taskApi = createApi({
       providesTags: (result, error, arg) => [{ type: "Task", id: arg }],
     }),
     //id에 해당하는 todo 수정
-    updateTodoDetail: builder.mutation<Task, Task>({
+    updateTodoDetail: builder.mutation<TodoInfo, TodoInfo>({
       query: (updatedTask) => ({
         url: `/todos/${updatedTask.id}`,
         method: "PUT",
@@ -48,7 +48,7 @@ export const taskApi = createApi({
       invalidatesTags: (result, error, arg) => [{ type: "Task", id: arg.id }],
     }),
     //task 추가
-    createTask: builder.mutation<Task, Task>({
+    createTask: builder.mutation<TodoInfo, TodoInfo>({
       query: (newTask) => ({
         url: "/todos",
         method: "POST",
@@ -57,7 +57,7 @@ export const taskApi = createApi({
       invalidatesTags: ["Task"],
     }),
     //id에 해당하는 task 삭제
-    deleteTask: builder.mutation<Task, string | undefined>({
+    deleteTask: builder.mutation<TodoInfo, string | undefined>({
       query: (id) => ({
         url: `/todos/${id}`,
         method: "DELETE",
