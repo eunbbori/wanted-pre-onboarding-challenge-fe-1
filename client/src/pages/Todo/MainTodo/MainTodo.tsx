@@ -3,6 +3,7 @@ import { BiLogInCircle, BiLogOutCircle } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import DetailTodo from "./components/DetailTodo";
 import ListTodo from "./components/ListTodo";
+import TOKEN from "./../../../utils/TOKEN";
 import {
   Container,
   MainTodoContainer,
@@ -20,10 +21,9 @@ import {
 
 const MainTodo = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem("login-token");
 
   const addHandler = () => {
-    if (!token) {
+    if (!TOKEN) {
       alert("로그인을 해주시기 바랍니다.");
       return;
     }
@@ -48,7 +48,7 @@ const MainTodo = () => {
         <TitleContainer>
           <MainTitleContainer>
             <p>ToDoList</p>
-            {!token && (
+            {!TOKEN && (
               <MainLoginButton
                 width={"60px"}
                 className={"loginBtn"}
@@ -57,7 +57,7 @@ const MainTodo = () => {
                 onClick={LoginHandler}
               />
             )}
-            {!token && (
+            {!TOKEN && (
               <MainRegisterButton
                 width={"60px"}
                 className={"registerBtn"}
@@ -66,7 +66,7 @@ const MainTodo = () => {
                 onClick={RegisterHandler}
               />
             )}
-            {token && (
+            {TOKEN && (
               <MainLogOutButton
                 width={"60px"}
                 className={"logoutBtn"}

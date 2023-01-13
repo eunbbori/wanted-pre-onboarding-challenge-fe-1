@@ -20,6 +20,7 @@ import {
   InputContainer,
 } from "./LoginStyle";
 import EMAIL_VALIDATION from "../../../utils/EMAIL_VALIDATION";
+import TOKEN from "./../../../utils/TOKEN";
 
 const Login = () => {
   const {
@@ -30,7 +31,7 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  if (localStorage.getItem("login-token")) {
+  if (TOKEN) {
     navigate("/");
   }
 
