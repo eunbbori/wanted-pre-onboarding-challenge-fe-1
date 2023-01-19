@@ -1,15 +1,15 @@
 import ItemTodo from "./ItemTodo";
 import { TodoInfo } from "./../../../../type/todoInfo";
-import { useGetAllTodoQuery } from "../../../../queries/todo";
-import { Key } from "react";
+
+import { useGetAllTaskListQuery } from "../../../../features/task/taskApi";
 
 const ListTodo = () => {
-  const { data } = useGetAllTodoQuery();
+  const { data } = useGetAllTaskListQuery({});
 
   return (
     <div>
       {data &&
-        data.data.map((task: TodoInfo, idx: Key | null | undefined) => (
+        data.data.map((task: TodoInfo, idx) => (
           <ItemTodo task={task} key={idx} />
         ))}
     </div>

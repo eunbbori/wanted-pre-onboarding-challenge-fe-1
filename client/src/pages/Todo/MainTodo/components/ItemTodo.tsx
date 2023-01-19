@@ -3,7 +3,7 @@ import { GiMagnifyingGlass } from "react-icons/gi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useNavigate } from "react-router";
 import AppAlertDialog from "../../../../components/AppDialog/AppAlertDialog";
-import { useDeleteTodoMutation } from "../../../../queries/todo";
+import { useDeleteTaskMutation } from "../../../../features/task/taskApi";
 
 import {
   Container,
@@ -24,7 +24,14 @@ const ItemTodo: React.FC<TodoTitleProps> = ({ task }) => {
   const navigate = useNavigate();
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  const deleteTodoMutation = useDeleteTodoMutation();
+  const [onDeleteTask, { isError: isErrorDeleteTask }] =
+    useDeleteTaskMutation();
+
+  useEffect(() => {
+    if (isErrorDeleteTask) {
+      alert("삭제 실패.");
+    }
+  }, [isErrorDeleteTask]);
 
   const viewHandler = () => {
     navigate(`/todo/${task.id}`);
@@ -39,7 +46,7 @@ const ItemTodo: React.FC<TodoTitleProps> = ({ task }) => {
   };
 
   const handleDeleteAgree = () => {
-    deleteTodoMutation.mutate(task.id);
+    onDeleteTask(task.id);
     setDialogOpen(false);
   };
 

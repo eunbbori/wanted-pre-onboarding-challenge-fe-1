@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import AppButton from "../../../components/AppButton/AppButton";
 import { TodoInfo } from "../../../type/todoInfo";
-import { useAddTodoMutation } from "../../../queries/todo";
+import { useNavigate } from "react-router-dom";
 
 import {
   Container,
@@ -13,6 +13,7 @@ import {
   ErrorDiv,
   ButtonContainer,
 } from "./AddTodoStyle";
+import { useCreateTaskMutation } from "../../../features/task/taskApi";
 
 const AddTodo = () => {
   const {
@@ -21,7 +22,9 @@ const AddTodo = () => {
     formState: { errors },
   } = useForm<TodoInfo>();
 
-  const addTodoMutation = useAddTodoMutation();
+  const [createTask] = useCreateTaskMutation();
+
+  const navigate = useNavigate();
 
   const onSubmitHandler: SubmitHandler<TodoInfo> = async (data) => {
     const title = data.title;
@@ -30,7 +33,14 @@ const AddTodo = () => {
       title: title,
       content: content,
     };
-    addTodoMutation.mutate(newTask);
+
+    createTask(newTask)
+      .then(() => {
+        navigate("/");
+      })
+      .catch(() => {
+        alert("에러가 발생하였습니다. 관리자에게 문의해주세요.");
+      });
   };
   return (
     <Container>
