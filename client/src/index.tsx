@@ -8,6 +8,10 @@ import Theme from "./styles/Theme";
 import GlobalStyle from "./styles/GlobalStyle";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -17,7 +21,10 @@ root.render(
     <ThemeProvider theme={Theme}>
       <GlobalStyle />
       <Provider store={store}>
-        <App />
+        <QueryClientProvider client={queryClient}>
+          <App />
+          <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+        </QueryClientProvider>
       </Provider>
     </ThemeProvider>
   </React.StrictMode>,
