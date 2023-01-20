@@ -19,8 +19,8 @@ export const useAddTodoMutation = () => {
   const navigate = useNavigate();
 
   return useMutation(fetchAddTodo, {
-    onSuccess: () => {
-      navigate("/");
+    onSuccess: (todo) => {
+      navigate(`/todo/${todo.data.data.id}`);
     },
     onError: () => {
       alert("에러가 발생하였습니다. 관리자에게 문의해주세요.");
@@ -41,9 +41,13 @@ export const useGetAllTodoQuery = () => {
 
 //todoDetail 조회
 const fetchTodoDetail = (taskId: string | undefined) => {
-  return todoApi
-    .get(`/todos/${taskId}`, { headers: { Authorization: TOKEN } })
-    .then((res) => res.data);
+  if (taskId) {
+    return todoApi
+      .get(`/todos/${taskId}`, { headers: { Authorization: TOKEN } })
+      .then((res) => res.data);
+  } else {
+    return false;
+  }
 };
 
 export const useGetDetailTodoQuery = (taskId: string | undefined) => {
@@ -86,8 +90,12 @@ const fetchDeleteTodo = (taskId: string | undefined) => {
 
 export const useDeleteTodoMutation = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   return useMutation(fetchDeleteTodo, {
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: [TODO] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [TODO] });
+      navigate("/");
+    },
   });
 };
