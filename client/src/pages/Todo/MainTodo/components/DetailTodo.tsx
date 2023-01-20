@@ -2,7 +2,9 @@ import { useParams } from "react-router";
 import { useState, useRef, useEffect } from "react";
 import { BsFillPencilFill } from "react-icons/bs";
 import { TodoInfo } from "./../../../../type/todoInfo";
+import { useNavigate } from "react-router-dom";
 import {
+  useGetAllTodoQuery,
   useGetDetailTodoQuery,
   useUpdateTodoMutation,
 } from "../../../../queries/todo";
@@ -21,6 +23,7 @@ const DetailTodo = () => {
   const [editMode, setEditMode] = useState(false);
   const [readOnly, setReadOnly] = useState(true);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const editHandler = () => {
     setEditMode(true);
@@ -66,6 +69,9 @@ const DetailTodo = () => {
     if (titleRef.current && contentRef.current && data) {
       titleRef.current.value = data.data.title;
       contentRef.current.value = data.data.content;
+    } else if (titleRef.current && contentRef.current && !data) {
+      titleRef!.current.value = "TITLE";
+      contentRef.current.value = "CONTENT";
     }
   }, [data]);
 
