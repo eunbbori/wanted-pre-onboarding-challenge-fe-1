@@ -1,13 +1,8 @@
-// eslint-disable-next-line no-warning-comments
-// TODO input 컴포넌트 분리 리팩토링
-
-import axios from "axios";
 import { useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import AppButton from "../../../components/AppButton/AppButton";
 import AppLabel from "../../../components/AppLabel/AppLabel";
 import { UserInfo } from "../../../type/userInfo";
-import { useNavigate } from "react-router-dom";
 import {
   Container,
   Title,
@@ -18,8 +13,8 @@ import {
   ButtonContainer,
   InputContainer,
 } from "./RegisterStyle";
-import DB_DOMAIN_URL from "../../../utils/DB_DOMAIN_URL";
 import EMAIL_VALIDATION from "../../../utils/EMAIL_VALIDATION";
+import { useRegisterMutation } from "./../../../queries/auth";
 
 const Register = () => {
   const {
@@ -29,7 +24,7 @@ const Register = () => {
     formState: { errors },
   } = useForm<UserInfo>();
 
-  const navigate = useNavigate();
+  const registerMutation = useRegisterMutation();
 
   const passwordRef = useRef<string | null>(null);
   passwordRef.current = watch("password");
@@ -38,16 +33,7 @@ const Register = () => {
     const email = data.email;
     const password = data.password;
     const newData = { email, password };
-    const res = await axios.post(`${DB_DOMAIN_URL}/users/create`, newData);
-    try {
-      if (res.status === 200) {
-        navigate("/auth/login");
-      } else {
-        alert(res.data.details);
-      } //TODO 409 이미존재하는 유저입니다
-    } catch (error) {
-      alert(error);
-    }
+    registerMutation.mutate(newData);
   };
   return (
     <Container>

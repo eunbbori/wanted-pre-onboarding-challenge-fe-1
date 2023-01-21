@@ -21,6 +21,7 @@ import {
 } from "./LoginStyle";
 import EMAIL_VALIDATION from "../../../utils/EMAIL_VALIDATION";
 import TOKEN from "./../../../utils/TOKEN";
+import { useLoginMutation } from "../../../queries/auth";
 
 const Login = () => {
   const {
@@ -30,6 +31,7 @@ const Login = () => {
   } = useForm<UserInfo>();
 
   const navigate = useNavigate();
+  const loginMutation = useLoginMutation();
 
   if (TOKEN) {
     navigate("/");
@@ -39,20 +41,21 @@ const Login = () => {
     const email = data.email;
     const password = data.password;
     const loginData = { email, password };
-    try {
-      const res = await axios.post(`${DB_DOMAIN_URL}/users/login`, loginData);
-      if (res.status === 200) {
-        localStorage.setItem("login-token", res.data.token);
-        navigate("/");
-        window.location.reload();
-      } else {
-        // alert("이메일 또는 비밀번호가 틀립니다.");
-        alert(res.data.details);
-      }
-    } catch (error) {
-      alert("이메일 또는 비밀번호가 틀립니다.");
-      // alert(error);
-    }
+    loginMutation.mutate(loginData);
+    // try {
+    //   const res = await axios.post(`${DB_DOMAIN_URL}/users/login`, loginData);
+    //   if (res.status === 200) {
+    //     localStorage.setItem("login-token", res.data.token);
+    //     navigate("/");
+    //     window.location.reload();
+    //   } else {
+    //     // alert("이메일 또는 비밀번호가 틀립니다.");
+    //     alert(res.data.details);
+    //   }
+    // } catch (error) {
+    //   alert("이메일 또는 비밀번호가 틀립니다.");
+    //   // alert(error);
+    // }
   };
   return (
     <Container>
