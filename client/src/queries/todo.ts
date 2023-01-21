@@ -1,18 +1,15 @@
-import axios from "axios";
-import DB_DOMAIN_URL from "../utils/DB_DOMAIN_URL";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { TodoInfo } from "../type/todoInfo";
 import TOKEN from "../utils/TOKEN";
 import { useNavigate } from "react-router-dom";
 import { TODO } from "../utils/queryKeys";
-
-const todoApi = axios.create({
-  baseURL: DB_DOMAIN_URL,
-});
+import authAxios from "./axios";
 
 //todo 추가
 const fetchAddTodo = (newTodo: TodoInfo) => {
-  return todoApi.post("/todos", newTodo, { headers: { Authorization: TOKEN } });
+  return authAxios.post("/todos", newTodo, {
+    headers: { Authorization: TOKEN },
+  });
 };
 
 export const useAddTodoMutation = () => {
@@ -30,7 +27,7 @@ export const useAddTodoMutation = () => {
 
 //todoList 조회
 const fetchTodoList = () => {
-  return todoApi
+  return authAxios
     .get("/todos", { headers: { Authorization: TOKEN } })
     .then((res) => res.data);
 };
@@ -42,7 +39,7 @@ export const useGetAllTodoQuery = () => {
 //todoDetail 조회
 const fetchTodoDetail = (taskId: string | undefined) => {
   if (taskId) {
-    return todoApi
+    return authAxios
       .get(`/todos/${taskId}`, { headers: { Authorization: TOKEN } })
       .then((res) => res.data);
   } else {
@@ -59,7 +56,7 @@ export const useGetDetailTodoQuery = (taskId: string | undefined) => {
 
 //todoDetail 수정
 const fetchUpdateTodo = (taskId: string | undefined, updatedTodo: TodoInfo) => {
-  return todoApi.put(`/todos/${taskId}`, updatedTodo, {
+  return authAxios.put(`/todos/${taskId}`, updatedTodo, {
     headers: { Authorization: TOKEN },
   });
 };
@@ -83,7 +80,7 @@ export const useUpdateTodoMutation = () => {
 
 //todoDetail 삭제
 const fetchDeleteTodo = (taskId: string | undefined) => {
-  return todoApi
+  return authAxios
     .delete(`/todos/${taskId}`, { headers: { Authorization: TOKEN } })
     .then((res) => res.data);
 };
