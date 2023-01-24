@@ -22,6 +22,9 @@ import {
 import EMAIL_VALIDATION from "../../../utils/EMAIL_VALIDATION";
 import TOKEN from "./../../../utils/TOKEN";
 import { useLoginMutation } from "../../../queries/auth";
+import TokenContext from "../../../context/TokenContext";
+import { useContext } from "react";
+import useLogin from "../../../hook/auth/useLogin";
 
 const Login = () => {
   const {
@@ -31,17 +34,27 @@ const Login = () => {
   } = useForm<UserInfo>();
 
   const navigate = useNavigate();
-  const loginMutation = useLoginMutation();
-
-  if (TOKEN) {
-    navigate("/");
-  }
+  // const loginMutation = useLoginMutation();
+  const { saveToken } = useContext(TokenContext);
+  const { mutate: login } = useLogin();
 
   const onSubmitHandler: SubmitHandler<UserInfo> = async (data) => {
     const email = data.email;
     const password = data.password;
     const loginData = { email, password };
-    loginMutation.mutate(loginData);
+    // loginMutation.mutate(loginData);
+    login(loginData, {
+      onSuccess: (data) => {
+        if (data.token) {
+          console.log(data.token);
+          saveToken(data.token);
+          navigate("/");
+          return;
+        }
+        alert("로그인에 실패했습니다. 로그인 정보를 다시 확인해주세요");
+      },
+    });
+
     // try {
     //   const res = await axios.post(`${DB_DOMAIN_URL}/users/login`, loginData);
     //   if (res.status === 200) {
