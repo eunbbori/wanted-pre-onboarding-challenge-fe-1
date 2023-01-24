@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import AppButton from "../../../components/AppButton/AppButton";
 import AppLabel from "../../../components/AppLabel/AppLabel";
@@ -15,6 +15,9 @@ import {
 } from "./RegisterStyle";
 import EMAIL_VALIDATION from "../../../utils/EMAIL_VALIDATION";
 import { useRegisterMutation } from "./../../../queries/auth";
+import TokenContext from "./../../../context/TokenContext";
+import useSignup from "./../../../hook/auth/useSignUp";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const {
@@ -23,8 +26,11 @@ const Register = () => {
     watch,
     formState: { errors },
   } = useForm<UserInfo>();
+  const navigate = useNavigate();
 
-  const registerMutation = useRegisterMutation();
+  // const registerMutation = useRegisterMutation();
+  const { saveToken } = useContext(TokenContext);
+  const { mutate: signup } = useSignup();
 
   const passwordRef = useRef<string | null>(null);
   passwordRef.current = watch("password");
@@ -33,7 +39,18 @@ const Register = () => {
     const email = data.email;
     const password = data.password;
     const newData = { email, password };
-    registerMutation.mutate(newData);
+    // registerMutation.mutate(newData);
+    signup(newData, {
+      onSuccess: (data) => {
+        if (data.token) {
+          alert(data.message);
+          saveToken(data.token);
+          navigate("/auth/login");
+          return;
+        }
+        alert("이미 존재하는 사용자입니다.");
+      },
+    });
   };
   return (
     <Container>
