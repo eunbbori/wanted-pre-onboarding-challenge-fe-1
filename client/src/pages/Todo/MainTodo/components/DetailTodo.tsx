@@ -18,6 +18,7 @@ import {
 } from "./DetailTodoStyle";
 import TokenContext from "../../../../context/TokenContext";
 import useGetDetailTodo from "./../../../../hook/todo/useGetDetailTodo";
+import useUpdateTodo from "../../../../hook/todo/useUpdateTodo";
 
 const DetailTodo = () => {
   const titleRef = useRef<HTMLInputElement>(null);
@@ -62,13 +63,14 @@ const DetailTodo = () => {
       id: id,
     };
     // updateTodoMutation.mutate({ taskId: id, updatedTodo: updateTask });
+    updateTodo(updateTask);
   };
 
   // const { data } = useGetDetailTodoQuery(id);
   // const updateTodoMutation = useUpdateTodoMutation();
   const { token } = useContext(TokenContext);
   const { data } = useGetDetailTodo(token!, id!);
-
+  const { mutate: updateTodo } = useUpdateTodo(token!);
   useEffect(() => {
     if (titleRef.current && contentRef.current && data) {
       titleRef.current.value = data.title;
