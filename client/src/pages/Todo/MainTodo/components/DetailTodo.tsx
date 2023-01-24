@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
 import { BsFillPencilFill } from "react-icons/bs";
 import { TodoInfo } from "./../../../../type/todoInfo";
 import { useNavigate } from "react-router-dom";
@@ -16,6 +16,8 @@ import {
   CancelButton,
   SaveButton,
 } from "./DetailTodoStyle";
+import TokenContext from "../../../../context/TokenContext";
+import useGetDetailTodo from "./../../../../hook/todo/useGetDetailTodo";
 
 const DetailTodo = () => {
   const titleRef = useRef<HTMLInputElement>(null);
@@ -37,8 +39,8 @@ const DetailTodo = () => {
     setEditMode(false);
     setReadOnly(true);
     if (titleRef.current && contentRef.current && data) {
-      titleRef.current.value = data.data.title;
-      contentRef.current.value = data.data.content;
+      titleRef.current.value = data.title;
+      contentRef.current.value = data.content;
     }
   };
 
@@ -59,16 +61,18 @@ const DetailTodo = () => {
       content: contentRef.current?.value || "",
       id: id,
     };
-    updateTodoMutation.mutate({ taskId: id, updatedTodo: updateTask });
+    // updateTodoMutation.mutate({ taskId: id, updatedTodo: updateTask });
   };
 
-  const { data } = useGetDetailTodoQuery(id);
-  const updateTodoMutation = useUpdateTodoMutation();
+  // const { data } = useGetDetailTodoQuery(id);
+  // const updateTodoMutation = useUpdateTodoMutation();
+  const { token } = useContext(TokenContext);
+  const { data } = useGetDetailTodo(token!, id!);
 
   useEffect(() => {
     if (titleRef.current && contentRef.current && data) {
-      titleRef.current.value = data.data.title;
-      contentRef.current.value = data.data.content;
+      titleRef.current.value = data.title;
+      contentRef.current.value = data.content;
     } else if (titleRef.current && contentRef.current && !data) {
       titleRef!.current.value = "TITLE";
       contentRef.current.value = "CONTENT";
