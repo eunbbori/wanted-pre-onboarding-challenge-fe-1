@@ -1,9 +1,11 @@
+import { useContext } from "react";
 import { BsFillPlusCircleFill, BsPersonPlusFill } from "react-icons/bs";
 import { BiLogInCircle, BiLogOutCircle } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import DetailTodo from "./components/DetailTodo";
 import ListTodo from "./components/ListTodo";
 import TOKEN from "./../../../utils/TOKEN";
+import TokenContext from "../../../context/TokenContext";
 import {
   Container,
   MainTodoContainer,
@@ -20,10 +22,12 @@ import {
 } from "./MainTodoStyle";
 
 const MainTodo = () => {
+  const { token } = useContext(TokenContext);
+  const { clearToken } = useContext(TokenContext);
   const navigate = useNavigate();
 
   const addHandler = () => {
-    if (!TOKEN) {
+    if (!token) {
       alert("로그인을 해주시기 바랍니다.");
       return;
     }
@@ -37,8 +41,9 @@ const MainTodo = () => {
     navigate("/auth/login");
   };
   const LogoutHandler = () => {
-    localStorage.removeItem("login-token");
-    window.location.reload();
+    clearToken();
+    // localStorage.removeItem("login-token");
+    // window.location.reload();
     navigate("/");
   };
 
@@ -48,7 +53,7 @@ const MainTodo = () => {
         <TitleContainer>
           <MainTitleContainer>
             <p>ToDoList</p>
-            {!TOKEN && (
+            {!token && (
               <MainLoginButton
                 width={"60px"}
                 className={"loginBtn"}
@@ -57,7 +62,7 @@ const MainTodo = () => {
                 onClick={LoginHandler}
               />
             )}
-            {!TOKEN && (
+            {!token && (
               <MainRegisterButton
                 width={"60px"}
                 className={"registerBtn"}
@@ -66,7 +71,7 @@ const MainTodo = () => {
                 onClick={RegisterHandler}
               />
             )}
-            {TOKEN && (
+            {token && (
               <MainLogOutButton
                 width={"60px"}
                 className={"logoutBtn"}
