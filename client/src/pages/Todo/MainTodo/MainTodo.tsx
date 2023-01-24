@@ -4,7 +4,6 @@ import { BiLogInCircle, BiLogOutCircle } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import DetailTodo from "./components/DetailTodo";
 import ListTodo from "./components/ListTodo";
-import TOKEN from "./../../../utils/TOKEN";
 import TokenContext from "../../../context/TokenContext";
 import {
   Container,
@@ -42,8 +41,6 @@ const MainTodo = () => {
   };
   const LogoutHandler = () => {
     clearToken();
-    // localStorage.removeItem("login-token");
-    // window.location.reload();
     navigate("/");
   };
 
