@@ -8,3 +8,11 @@ export interface UserInfo {
 export interface AuthResType {
   token: string;
 }
+export interface LoginResponse {
+  message: string;
+  token: string;
+}
+export interface SignupResponse {
+  message: string;
+  token: string;
+}
