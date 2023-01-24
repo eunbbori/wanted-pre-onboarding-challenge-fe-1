@@ -2,7 +2,9 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import AppButton from "../../../components/AppButton/AppButton";
 import { TodoInfo } from "../../../type/todoInfo";
 import { useAddTodoMutation } from "../../../queries/todo";
-
+import useAddTodo from "./../../../hook/todo/useAddTodo";
+import { useContext } from "react";
+import TokenContext from "./../../../context/TokenContext";
 import {
   Container,
   FormContainer,
@@ -21,7 +23,9 @@ const AddTodo = () => {
     formState: { errors },
   } = useForm<TodoInfo>();
 
-  const addTodoMutation = useAddTodoMutation();
+  // const addTodoMutation = useAddTodoMutation();
+  const { token } = useContext(TokenContext);
+  const { mutate: addTodo } = useAddTodo(token!);
   const onSubmitHandler: SubmitHandler<TodoInfo> = async (data) => {
     const title = data.title;
     const content = data.content;
@@ -29,7 +33,8 @@ const AddTodo = () => {
       title: title,
       content: content,
     };
-    addTodoMutation.mutate(newTask);
+    // addTodoMutation.mutate(newTask);
+    addTodo(newTask);
   };
   return (
     <Container>
