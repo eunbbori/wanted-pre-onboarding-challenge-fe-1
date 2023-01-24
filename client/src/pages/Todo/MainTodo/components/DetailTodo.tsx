@@ -1,13 +1,10 @@
-import { useParams } from "react-router";
 import { useState, useRef, useEffect, useContext } from "react";
+import { useParams } from "react-router";
+import TokenContext from "../../../../context/TokenContext";
+import useGetDetailTodo from "./../../../../hook/todo/useGetDetailTodo";
+import useUpdateTodo from "../../../../hook/todo/useUpdateTodo";
 import { BsFillPencilFill } from "react-icons/bs";
 import { TodoInfo } from "./../../../../type/todoInfo";
-import { useNavigate } from "react-router-dom";
-import {
-  useGetAllTodoQuery,
-  useGetDetailTodoQuery,
-  useUpdateTodoMutation,
-} from "../../../../queries/todo";
 import {
   Container,
   TitleContainer,
@@ -16,9 +13,6 @@ import {
   CancelButton,
   SaveButton,
 } from "./DetailTodoStyle";
-import TokenContext from "../../../../context/TokenContext";
-import useGetDetailTodo from "./../../../../hook/todo/useGetDetailTodo";
-import useUpdateTodo from "../../../../hook/todo/useUpdateTodo";
 
 const DetailTodo = () => {
   const titleRef = useRef<HTMLInputElement>(null);
@@ -26,7 +20,6 @@ const DetailTodo = () => {
   const [editMode, setEditMode] = useState(false);
   const [readOnly, setReadOnly] = useState(true);
   const { id } = useParams();
-  const navigate = useNavigate();
 
   const editHandler = () => {
     setEditMode(true);
@@ -62,12 +55,9 @@ const DetailTodo = () => {
       content: contentRef.current?.value || "",
       id: id,
     };
-    // updateTodoMutation.mutate({ taskId: id, updatedTodo: updateTask });
     updateTodo(updateTask);
   };
 
-  // const { data } = useGetDetailTodoQuery(id);
-  // const updateTodoMutation = useUpdateTodoMutation();
   const { token } = useContext(TokenContext);
   const { data } = useGetDetailTodo(token!, id!);
   const { mutate: updateTodo } = useUpdateTodo(token!);
