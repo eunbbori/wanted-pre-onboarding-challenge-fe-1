@@ -48,6 +48,11 @@ const Login = () => {
       },
     });
   };
+  const toRegisterHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    navigate("/auth/register");
+  };
+
   return (
     <Container>
       <FormContainer onSubmit={handleSubmit(onSubmitHandler)}>
@@ -97,10 +102,17 @@ const Login = () => {
         </InputContainer>
         <ButtonContainer>
           <AppButton
-            width={"200px"}
+            width={"180px"}
             className={"loginBtn"}
             type={"submit"}
             text="Login"
+          />
+          <AppButton
+            width={"180px"}
+            className={"toRegisterBtn"}
+            type={"button"}
+            text="Sign up"
+            onClick={toRegisterHandler}
           />
         </ButtonContainer>
       </FormContainer>
