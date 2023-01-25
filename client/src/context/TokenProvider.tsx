@@ -1,5 +1,5 @@
 import { ReactNode, useCallback } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import TokenContext from "./TokenContext";
 
 const TokenProvider = ({ children }: { children: ReactNode }) => {

@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import authAxios from "../../queries/axios";
 import { TODO } from "../../utils/queryKeys";
 import { TodoInfo } from "../../type/todoInfo";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const deleteTodo = async (token: string, taskId: string): Promise<TodoInfo> => {
   return authAxios

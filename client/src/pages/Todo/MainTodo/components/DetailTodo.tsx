@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useContext } from "react";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import TokenContext from "../../../../context/TokenContext";
 import useGetDetailTodo from "./../../../../hook/todo/useGetDetailTodo";
 import useUpdateTodo from "../../../../hook/todo/useUpdateTodo";
