@@ -72,4 +72,6 @@ export const ButtonContainer = styled.div`
   font-family: "Secular One", sans-serif;
   text-align: center;
   margin-top: 50px;
+  display: flex;
+  justify-content: space-evenly;
 `;
