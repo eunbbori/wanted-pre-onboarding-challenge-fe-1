@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+// import { Prompt } from "react-router-dom"; react-router-dom v6 에는 X
+import usePreventLeave from "./../../../utils/hooks/usePreventLeave";
 import TokenContext from "./../../../context/TokenContext";
 import useAddTodo from "./../../../hook/todo/useAddTodo";
 import AppButton from "../../../components/AppButton/AppButton";
@@ -21,6 +23,7 @@ const AddTodo = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<TodoInfo>();
+  const { enablePrevent } = usePreventLeave();
 
   const { token } = useContext(TokenContext);
   const { mutate: addTodo } = useAddTodo(token!);
@@ -46,6 +49,7 @@ const AddTodo = () => {
               {...register("title", { required: true })}
               type="text"
               placeholder="title"
+              onChange={enablePrevent}
             />
           </InputDiv>
           <ErrorDiv>
@@ -58,6 +62,7 @@ const AddTodo = () => {
               id="content"
               {...register("content", { required: true })}
               placeholder="content"
+              onChange={enablePrevent}
             />
           </InputDiv>
           <ErrorDiv>
