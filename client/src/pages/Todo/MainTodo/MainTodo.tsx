@@ -1,10 +1,11 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { BsFillPlusCircleFill, BsPersonPlusFill } from "react-icons/bs";
 import { BiLogInCircle, BiLogOutCircle } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import DetailTodo from "./components/DetailTodo";
 import ListTodo from "./components/ListTodo";
 import TokenContext from "../../../context/TokenContext";
+import AppAlertDialog from "../../../components/AppDialog/AppAlertDialog";
 import {
   Container,
   MainTodoContainer,
@@ -23,6 +24,7 @@ import {
 const MainTodo = () => {
   const { token } = useContext(TokenContext);
   const { clearToken } = useContext(TokenContext);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const navigate = useNavigate();
 
   const addHandler = () => {
@@ -40,8 +42,14 @@ const MainTodo = () => {
     navigate("/auth/login");
   };
   const LogoutHandler = () => {
+    setDialogOpen(true);
+  };
+  const handleClose = () => {
+    setDialogOpen(false);
+  };
+  const handleLogoutAgree = () => {
     clearToken();
-    navigate("/");
+    setDialogOpen(false);
   };
 
   return (
@@ -77,6 +85,15 @@ const MainTodo = () => {
                 onClick={LogoutHandler}
               />
             )}
+            <AppAlertDialog
+              AlertText={"로그아웃 하시겠습니까?"}
+              AlertDescription={"로그인 페이지로 이동합니다."}
+              DisagreeText={"취소"}
+              AgreeText={"로그아웃"}
+              openState={dialogOpen}
+              handleClose={handleClose}
+              handleAgree={handleLogoutAgree}
+            />
           </MainTitleContainer>
           <SubTitleContainer>
             <p>Check your Lists</p>
