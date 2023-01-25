@@ -1,13 +1,13 @@
-// eslint-disable-next-line no-warning-comments
-// TODO input 컴포넌트 분리 리팩토링
-
-import axios from "axios";
 import { useForm, SubmitHandler } from "react-hook-form";
+import TokenContext from "../../../context/TokenContext";
+import { useContext } from "react";
+import useLogin from "../../../hook/auth/useLogin";
+import usePreventLeave from "./../../../utils/hooks/usePreventLeave";
+import { useNavigate } from "react-router-dom";
 import AppButton from "../../../components/AppButton/AppButton";
 import AppLabel from "../../../components/AppLabel/AppLabel";
-import { useNavigate } from "react-router-dom";
-import DB_DOMAIN_URL from "../../../utils/DB_DOMAIN_URL";
 import { UserInfo } from "../../../type/userInfo";
+import EMAIL_VALIDATION from "../../../utils/EMAIL_VALIDATION";
 
 import {
   Container,
@@ -19,12 +19,6 @@ import {
   ButtonContainer,
   InputContainer,
 } from "./LoginStyle";
-import EMAIL_VALIDATION from "../../../utils/EMAIL_VALIDATION";
-import TOKEN from "./../../../utils/TOKEN";
-import { useLoginMutation } from "../../../queries/auth";
-import TokenContext from "../../../context/TokenContext";
-import { useContext } from "react";
-import useLogin from "../../../hook/auth/useLogin";
 
 const Login = () => {
   const {
@@ -32,9 +26,9 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<UserInfo>();
+  const { enablePrevent } = usePreventLeave();
 
   const navigate = useNavigate();
-  // const loginMutation = useLoginMutation();
   const { saveToken } = useContext(TokenContext);
   const { mutate: login } = useLogin();
 
@@ -42,7 +36,6 @@ const Login = () => {
     const email = data.email;
     const password = data.password;
     const loginData = { email, password };
-    // loginMutation.mutate(loginData);
     login(loginData, {
       onSuccess: (data) => {
         if (data.token) {
@@ -54,21 +47,6 @@ const Login = () => {
         alert("로그인에 실패했습니다. 로그인 정보를 다시 확인해주세요");
       },
     });
-
-    // try {
-    //   const res = await axios.post(`${DB_DOMAIN_URL}/users/login`, loginData);
-    //   if (res.status === 200) {
-    //     localStorage.setItem("login-token", res.data.token);
-    //     navigate("/");
-    //     window.location.reload();
-    //   } else {
-    //     // alert("이메일 또는 비밀번호가 틀립니다.");
-    //     alert(res.data.details);
-    //   }
-    // } catch (error) {
-    //   alert("이메일 또는 비밀번호가 틀립니다.");
-    //   // alert(error);
-    // }
   };
   return (
     <Container>
@@ -86,6 +64,7 @@ const Login = () => {
                 pattern: EMAIL_VALIDATION,
               })}
               type="email"
+              onChange={enablePrevent}
             />
           </InputDiv>
           <ErrorDiv>
@@ -102,6 +81,7 @@ const Login = () => {
               id="password"
               {...register("password", { required: true, minLength: 8 })}
               type="password"
+              onChange={enablePrevent}
             />
           </InputDiv>
           <ErrorDiv>

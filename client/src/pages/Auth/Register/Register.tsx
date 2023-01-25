@@ -1,8 +1,14 @@
 import { useContext, useRef } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import TokenContext from "./../../../context/TokenContext";
+import useSignup from "./../../../hook/auth/useSignUp";
+import usePreventLeave from "../../../utils/hooks/usePreventLeave";
+import { useNavigate } from "react-router-dom";
 import AppButton from "../../../components/AppButton/AppButton";
 import AppLabel from "../../../components/AppLabel/AppLabel";
 import { UserInfo } from "../../../type/userInfo";
+import EMAIL_VALIDATION from "../../../utils/EMAIL_VALIDATION";
+
 import {
   Container,
   Title,
@@ -13,11 +19,6 @@ import {
   ButtonContainer,
   InputContainer,
 } from "./RegisterStyle";
-import EMAIL_VALIDATION from "../../../utils/EMAIL_VALIDATION";
-import { useRegisterMutation } from "./../../../queries/auth";
-import TokenContext from "./../../../context/TokenContext";
-import useSignup from "./../../../hook/auth/useSignUp";
-import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const {
@@ -27,6 +28,7 @@ const Register = () => {
     formState: { errors },
   } = useForm<UserInfo>();
   const navigate = useNavigate();
+  const { enablePrevent } = usePreventLeave();
 
   // const registerMutation = useRegisterMutation();
   const { saveToken } = useContext(TokenContext);
@@ -68,6 +70,7 @@ const Register = () => {
                 minLength: 1,
                 maxLength: 20,
               })}
+              onChange={enablePrevent}
             />
           </InputDiv>
           <ErrorDiv>
@@ -90,6 +93,7 @@ const Register = () => {
                 minLength: 1,
                 maxLength: 10,
               })}
+              onChange={enablePrevent}
             />
           </InputDiv>
           <ErrorDiv>
@@ -112,6 +116,7 @@ const Register = () => {
                 pattern: EMAIL_VALIDATION,
               })}
               type="email"
+              onChange={enablePrevent}
             />
           </InputDiv>
           <ErrorDiv>
@@ -128,6 +133,7 @@ const Register = () => {
               id="password"
               {...register("password", { required: true, minLength: 8 })}
               type="password"
+              onChange={enablePrevent}
             />
           </InputDiv>
           <ErrorDiv>
@@ -149,6 +155,7 @@ const Register = () => {
                 validate: (value) => value === passwordRef.current,
               })}
               type="password"
+              onChange={enablePrevent}
             />
           </InputDiv>
           <ErrorDiv>
