@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import authAxios from "../../queries/axios";
 import { TODO } from "../../utils/queryKeys";
 import { TodoInfo } from "../../type/todoInfo";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const addTodo = async (token: string, newTodo: TodoInfo): Promise<TodoInfo> => {
   return authAxios

@@ -1,5 +1,5 @@
 import { BaseQueryFn } from "@reduxjs/toolkit/dist/query";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { AxiosRequestConfig } from "axios";
 import authAxios from "../auth/authAxios";
 
