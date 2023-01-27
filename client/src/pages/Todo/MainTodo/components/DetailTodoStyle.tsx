@@ -14,6 +14,7 @@ export const TitleContainer = styled.div`
     font-size: 2.5rem;
     font-weight: bold;
     color: ${Theme.color.color4};
+    font-family: "Galmuri14";
 
     &:focus {
       outline: none;
@@ -34,6 +35,7 @@ export const ContentContainer = styled.div`
     color: ${Theme.color.color4};
     font-size: 1.5rem;
     font-family: "Secular One", sans-serif;
+    font-family: "Galmuri14";
     width: 200px;
     &:focus {
       outline: none;
@@ -47,7 +49,6 @@ export const MainEditButton = styled(AppButton)`
   bottom: 7vh;
   font-size: 3rem;
   height: 60px;
-  font-family: "Secular One", sans-serif;
   border-radius: 50%;
   background: ${Theme.color.color2};
   line-height: inherit;
@@ -67,7 +68,7 @@ export const SaveButton = styled(AppButton)`
   font-size: 1.5rem;
   width: 110px;
   height: 60px;
-  font-family: "Secular One", sans-serif;
+  font-family: "Galmuri14";
   border-radius: 15px;
   background: ${Theme.color.color1};
   line-height: inherit;
@@ -86,7 +87,7 @@ export const CancelButton = styled(AppButton)`
   font-size: 1.5rem;
   width: 110px;
   height: 60px;
-  font-family: "Secular One", sans-serif;
+  font-family: "Galmuri14";
   border-radius: 15px;
   background: ${Theme.color.color1};
   line-height: inherit;
