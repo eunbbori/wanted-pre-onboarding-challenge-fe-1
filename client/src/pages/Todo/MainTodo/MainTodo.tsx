@@ -6,6 +6,7 @@ import DetailTodo from "./components/DetailTodo";
 import ListTodo from "./components/ListTodo";
 import TokenContext from "../../../context/TokenContext";
 import AppAlertDialog from "../../../components/AppDialog/AppAlertDialog";
+import AppAlertModal from "../../../components/AppAlertModal/AppAlertModal";
 import {
   Container,
   MainTodoContainer,
@@ -54,6 +55,7 @@ const MainTodo = () => {
 
   return (
     <Container>
+      {!token && <AppAlertModal />}
       <MainTodoContainer>
         <TitleContainer>
           <MainTitleContainer>
