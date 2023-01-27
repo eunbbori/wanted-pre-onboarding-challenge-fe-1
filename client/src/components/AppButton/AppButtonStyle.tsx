@@ -14,5 +14,6 @@ export const Button = styled.button<AppButtonProps>`
 
   &:hover {
     background-color: ${Theme.color.color3};
+    cursor: pointer;
   }
 `;
