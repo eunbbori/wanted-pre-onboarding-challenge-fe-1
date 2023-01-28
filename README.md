@@ -3,6 +3,26 @@
 ## 전체 구현 Preview
 <img src="https://user-images.githubusercontent.com/112812483/215269690-3db7fff4-ecfa-4f7a-b675-231d936c8f91.gif" width="100%" height="30%">
 
+## 실행 방법
+### 설치 및 환경세팅
+```
+git clone https://github.com/eunbbori/wanted-pre-onboarding-challenge-fe-1.git
+yarn
+```
+### 실행
+#### client
+```
+port: 3000
+cd client
+yarn start
+```
+#### server
+```
+port: 8080
+cd server
+yarn start
+```
+
 ## 클라이언트 구현 과제 
 ### Assignment 1 - Login / SignUp
 - /auth 경로에 로그인 / 회원가입 기능을 개발합니다
@@ -30,6 +50,62 @@
 - 한 페이지 내에서 새로고침 없이 데이터가 정합성을 갖추도록 구현해주세요
   - 수정되는 Todo의 내용이 목록에서도 실시간으로 반영되어야 합니다
 
+## 사용한 라이브러리 
+```javascript
+// client/package.json
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.11.4", // mui를 이용하여 빠르고 간단한 Dialog UI 생성
+    "@mui/styled-engine-sc": "^5.11.0",
+    "@reduxjs/toolkit": "^1.9.1",
+    "@tanstack/react-query": "^4.22.0", // server state 관리 
+    "@tanstack/react-query-devtools": "^4.22.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.11",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.10",
+    "@types/react-redux": "^7.1.25", // React-query 전환 전에 RTK-query로 server state 관리 
+    "axios": "^1.2.1",
+    "eslint": "^8.31.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.41.3", // 회원가입,로그인,TODO 추가 등 여러개의 input을 한 번에 관리
+    "react-icons": "^4.7.1",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.4.5",
+    "react-scripts": "5.0.1",
+    "styled-components": "^5.3.6",
+    "styled-reset": "^4.4.4",
+    "typescript": "^4.9.4",
+    "web-vitals": "^2.1.4"
+  },
+   "devDependencies": {
+    "@types/styled-components": "^5.1.26",
+    "@typescript-eslint/eslint-plugin": "^5.47.1",
+    "@typescript-eslint/parser": "^5.47.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
+    "prettier": "^2.8.1"
+  }
+}
+```
+## 폴더 구조 
+
+
+
 ## 기능별 구현 화면 
 ### AUTH - Login / SignUp
 1) SignUp ( 회원가입 )
@@ -37,22 +113,22 @@
 
 2) Login ( 로그인 ) 
 
-<img src="https://user-images.githubusercontent.com/112812483/211202468-f937ef88-1e00-4c64-a855-70fe3117df90.gif" width="60%" height="30%">
+<img src="https://user-images.githubusercontent.com/112812483/211202468-f937ef88-1e00-4c64-a855-70fe3117df90.gif" width="100%" height="30%">
 
 ### TODO - CRUD
 
 1) Todo 추가 
-<img src="https://user-images.githubusercontent.com/112812483/211202943-5a096f32-5f36-4a15-9d46-66d378247547.gif" width="60%" height="30%">
+<img src="https://user-images.githubusercontent.com/112812483/211202943-5a096f32-5f36-4a15-9d46-66d378247547.gif" width="100%" height="30%">
 
 2) Todo List / Detail 조회
 
-<img src="https://user-images.githubusercontent.com/112812483/211203022-d9cc4b19-e3ef-442c-acc3-389de5bce0c6.gif" width="60%" height="30%">
+<img src="https://user-images.githubusercontent.com/112812483/211203022-d9cc4b19-e3ef-442c-acc3-389de5bce0c6.gif" width="100%" height="30%">
 
 3) Todo 삭제 
 
-<img src="https://user-images.githubusercontent.com/112812483/211203062-57f00c42-f185-4537-8259-8917be5a519c.gif" width="60%" height="30%">
+<img src="https://user-images.githubusercontent.com/112812483/211203062-57f00c42-f185-4537-8259-8917be5a519c.gif" width="100%" height="30%">
 
 4) Todo 수정
 
-<img src="https://user-images.githubusercontent.com/112812483/211203112-9b1a6c88-06f1-4ac4-b57d-7369b62baa2f.gif" width="60%" height="30%">
+<img src="https://user-images.githubusercontent.com/112812483/211203112-9b1a6c88-06f1-4ac4-b57d-7369b62baa2f.gif" width="100%" height="30%">
 
