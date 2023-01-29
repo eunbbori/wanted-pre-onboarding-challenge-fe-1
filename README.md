@@ -223,7 +223,7 @@ yarn start
 - 만약 이 form의 약 10개 가량의 input 값들이 실시간으로 검증되고 관리돼야한다면 코드가 굉장히 길어질 수 밖에 없겠다는 생각을 하고 약간의 안도감(?)을 느꼈습니다. 
 
 - 그래서 이번 회원가입 form을 구현할 때 **너무 많은 state와 함수가 담기지 않고 컴포넌트의 랜더링 횟수도 최소화 할 수 있는 방법을 찾아보다가** react-hook-form 라이브러리를 활용하게 됐습니다.    
-- [커밋보기](756af7b042dadf856e627d12af3e341d64ba2153)
+- [커밋보기](e963194)
 
 ### React-Query 적용 
 
@@ -250,7 +250,7 @@ yarn start
 - 기존 react-query 만으로는 로그인 토큰이 전역으로 관리되지 못해 캐싱이 무효화되지 않는 문제 발생했다.
   - 로그인 후에 새로고침을 해야만 todolist CRUD 에 대한 권한 부여 받음
 - contextAPI로 token을 전역 관리 후 문제를 해결했다.
-- [커밋 보기](b2306296007e303df3076b9984bc760fe5b9b7cb)
+- [커밋 보기](https://github.com/eunbbori/wanted-pre-onboarding-challenge-fe-1/commit/b2306296007e303df3076b9984bc760fe5b9b7cb)
 
 ### 삭제/제출에 대한 확인 처리
 
