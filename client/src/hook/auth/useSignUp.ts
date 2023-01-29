@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import authAxios from "../../queries/axios";
+import authAxios from "../../api/axios";
 import { SignupResponse, UserInfo } from "../../type/userInfo";
 
 const Signup = async (newUser: UserInfo): Promise<SignupResponse> => {

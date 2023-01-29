@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import authAxios from "../../queries/axios";
+import authAxios from "../../api/axios";
 import { TODO } from "../../utils/queryKeys";
 import { TodoInfo } from "./../../type/todoInfo";
 

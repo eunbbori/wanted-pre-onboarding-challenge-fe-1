@@ -6,8 +6,6 @@ import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "styled-components";
 import Theme from "./styles/Theme";
 import GlobalStyle from "./styles/GlobalStyle";
-import { Provider } from "react-redux";
-import { store } from "./app/store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
@@ -20,12 +18,10 @@ root.render(
   <React.StrictMode>
     <ThemeProvider theme={Theme}>
       <GlobalStyle />
-      <Provider store={store}>
-        <QueryClientProvider client={queryClient}>
-          <App />
-          <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
-        </QueryClientProvider>
-      </Provider>
+      <QueryClientProvider client={queryClient}>
+        <App />
+        <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+      </QueryClientProvider>
     </ThemeProvider>
   </React.StrictMode>,
 );
