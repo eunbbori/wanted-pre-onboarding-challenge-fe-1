@@ -103,32 +103,111 @@ yarn start
 }
 ```
 ## 폴더 구조 
+|폴더|용도|
+|------|---|
+|**api**|테스트2|
+|**components**|테스트2|
+|**context**|테스트2|
+|**hook**|테스트2|
+|**pages**|테스트2|
+|**styles**|테스트2|
+|**type**|테스트2|
+|**utils**|테스트2|
 
+```
+📦src
+ ┣ 📂api
+ ┃ ┗ 📜axios.ts
+ ┣ 📂components
+ ┃ ┣ 📂AppAlertModal
+ ┃ ┃ ┣ 📜AppAlertModal.tsx
+ ┃ ┃ ┗ 📜AppAlertModalStyle.tsx
+ ┃ ┣ 📂AppButton
+ ┃ ┃ ┣ 📜AppButton.tsx
+ ┃ ┃ ┗ 📜AppButtonStyle.tsx
+ ┃ ┣ 📂AppDialog
+ ┃ ┃ ┗ 📜AppAlertDialog.tsx
+ ┃ ┗ 📂AppLabel
+ ┃ ┃ ┣ 📜AppLabel.tsx
+ ┃ ┃ ┗ 📜AppLabelStyle.tsx
+ ┣ 📂context
+ ┃ ┣ 📜TokenContext.ts
+ ┃ ┗ 📜TokenProvider.tsx
+ ┣ 📂hook
+ ┃ ┣ 📂auth
+ ┃ ┃ ┣ 📜useLogin.ts
+ ┃ ┃ ┗ 📜useSignUp.ts
+ ┃ ┗ 📂todo
+ ┃ ┃ ┣ 📜useAddTodo.ts
+ ┃ ┃ ┣ 📜useDeleteTodo.ts
+ ┃ ┃ ┣ 📜useGetAllTodo.ts
+ ┃ ┃ ┣ 📜useGetDetailTodo.ts
+ ┃ ┃ ┗ 📜useUpdateTodo.ts
+ ┣ 📂pages
+ ┃ ┣ 📂Auth
+ ┃ ┃ ┣ 📂Login
+ ┃ ┃ ┃ ┣ 📜Login.tsx
+ ┃ ┃ ┃ ┗ 📜LoginStyle.tsx
+ ┃ ┃ ┗ 📂Register
+ ┃ ┃ ┃ ┣ 📜Register.tsx
+ ┃ ┃ ┃ ┗ 📜RegisterStyle.tsx
+ ┃ ┗ 📂Todo
+ ┃ ┃ ┣ 📂AddTodo
+ ┃ ┃ ┃ ┣ 📜AddTodo.tsx
+ ┃ ┃ ┃ ┗ 📜AddTodoStyle.tsx
+ ┃ ┃ ┗ 📂MainTodo
+ ┃ ┃ ┃ ┣ 📂components
+ ┃ ┃ ┃ ┃ ┣ 📜DetailTodo.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜DetailTodoStyle.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜ItemTodo.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜ItemTodoStyle.tsx
+ ┃ ┃ ┃ ┃ ┣ 📜ListTodo.tsx
+ ┃ ┃ ┃ ┃ ┗ 📜ListTodoStyle.tsx
+ ┃ ┃ ┃ ┣ 📜MainTodo.tsx
+ ┃ ┃ ┃ ┗ 📜MainTodoStyle.tsx
+ ┣ 📂styles
+ ┃ ┣ 📜GlobalStyle.ts
+ ┃ ┣ 📜style.d.ts
+ ┃ ┗ 📜Theme.ts
+ ┣ 📂type
+ ┃ ┣ 📜todoInfo.ts
+ ┃ ┗ 📜userInfo.ts
+ ┣ 📂utils
+ ┃ ┣ 📂hooks
+ ┃ ┃ ┗ 📜usePreventLeave.ts
+ ┃ ┣ 📜DB_DOMAIN_URL.ts
+ ┃ ┣ 📜EMAIL_VALIDATION.ts
+ ┃ ┣ 📜queryKeys.ts
+ ┃ ┗ 📜TOKEN.ts
+ ┣ 📜App.test.tsx
+ ┣ 📜App.tsx
 
-
+```
 ## 기능별 구현 화면 
 ### AUTH - Login / SignUp
 1) SignUp ( 회원가입 )
 <img src="https://user-images.githubusercontent.com/112812483/215271521-29ef4739-089e-4fa3-85df-a74e000c62d2.gif" width="100%" height="30%">
 
 2) Login ( 로그인 ) 
+<img src="https://user-images.githubusercontent.com/112812483/215309298-53b78a15-3b0a-4ec8-bd51-8a6ad261f63c.gif" width="100%" height="30%">
 
-<img src="https://user-images.githubusercontent.com/112812483/211202468-f937ef88-1e00-4c64-a855-70fe3117df90.gif" width="100%" height="30%">
+3) Logout ( 로그아웃 )
+<img src="https://user-images.githubusercontent.com/112812483/215310009-ec1bcba2-fe72-4222-967e-8640d1f5480b.gif" width="100%" height="30%">
 
 ### TODO - CRUD
 
 1) Todo 추가 
-<img src="https://user-images.githubusercontent.com/112812483/211202943-5a096f32-5f36-4a15-9d46-66d378247547.gif" width="100%" height="30%">
+<img src="https://user-images.githubusercontent.com/112812483/215309475-41c0fd9f-f6b2-49b3-bfab-9d19b1632d02.gif" width="100%" height="30%">
 
 2) Todo List / Detail 조회
 
-<img src="https://user-images.githubusercontent.com/112812483/211203022-d9cc4b19-e3ef-442c-acc3-389de5bce0c6.gif" width="100%" height="30%">
+<img src="https://user-images.githubusercontent.com/112812483/215309655-5df984b0-2c7f-42ab-b12f-5cbed6de71ed.gif" width="100%" height="30%">
 
 3) Todo 삭제 
 
-<img src="https://user-images.githubusercontent.com/112812483/211203062-57f00c42-f185-4537-8259-8917be5a519c.gif" width="100%" height="30%">
+<img src="https://user-images.githubusercontent.com/112812483/215309740-e6b35ba5-3b8a-4f88-8595-041187f9b679.gif" width="100%" height="30%">
 
 4) Todo 수정
 
-<img src="https://user-images.githubusercontent.com/112812483/211203112-9b1a6c88-06f1-4ac4-b57d-7369b62baa2f.gif" width="100%" height="30%">
+<img src="https://user-images.githubusercontent.com/112812483/215309922-12497b6e-8695-4853-bdd7-7e037193477d.gif" width="100%" height="30%">
 
