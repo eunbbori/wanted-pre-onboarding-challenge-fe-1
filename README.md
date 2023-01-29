@@ -250,8 +250,7 @@ yarn start
 - 기존 react-query 만으로는 로그인 토큰이 전역으로 관리되지 못해 캐싱이 무효화되지 않는 문제 발생했다.
   - 로그인 후에 새로고침을 해야만 todolist CRUD 에 대한 권한 부여 받음
 - contextAPI로 token을 전역 관리 후 문제를 해결했다.
-
-[커밋 보기](b2306296007e303df3076b9984bc760fe5b9b7cb)
+- [커밋 보기](b2306296007e303df3076b9984bc760fe5b9b7cb)
 
 ### 삭제/제출에 대한 확인 처리
 
@@ -266,5 +265,7 @@ yarn start
 다른 사람이 보더라도 쉽게 읽히고 이해가 가는 가독성에 주안점을 두고 코드를 작성하려했습니다. 또한 처음으로 React-Query를 학습해봄으로써 CRUD 기본 응용을 오류 없이 완성하는 것이 목표였습니다.
 
 ## 한계점 및 개선 사항 
-- 
-- 
+- 유저 인터페이스(View)와 비즈니스(Business, Domain) 로직을 분리하여 코드를 리팩토링 할 것 
+- 리액트 쿼리가 제공하는 다양한 데이터들을 50% 이상 활용할 것 
+- 현재는 React Query의 onError만을 사용하여 간단한 오류 메시지를 alert 하지만, Error Boundaries를 학습해 Error Handling 설계 및 적용할 것 [(공식문서)](https://tkdodo.eu/blog/react-query-error-handling)
+- suspense를 통한 로딩 처리 
