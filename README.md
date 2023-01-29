@@ -223,7 +223,7 @@ yarn start
 - 만약 이 form의 약 10개 가량의 input 값들이 실시간으로 검증되고 관리돼야한다면 코드가 굉장히 길어질 수 밖에 없겠다는 생각을 하고 약간의 안도감(?)을 느꼈습니다. 
 
 - 그래서 이번 회원가입 form을 구현할 때 **너무 많은 state와 함수가 담기지 않고 컴포넌트의 랜더링 횟수도 최소화 할 수 있는 방법을 찾아보다가** react-hook-form 라이브러리를 활용하게 됐습니다.    
-- [커밋보기](e963194)
+- [커밋보기](https://github.com/eunbbori/wanted-pre-onboarding-challenge-fe-1/commit/4e79e4b53ddd85e9ad3a0c6c1cc5a83b338e8916)
 
 ### React-Query 적용 
 
@@ -240,11 +240,11 @@ yarn start
  
 - React-query 전환 이유 
   - RTK-query 보다 참고자료가 많다 
-  - 리덕스 기반이 아니기 때문에 Boilerplate 양이 현저히 적었다  [(RTK쿼리 적용 커밋)](4095d9d21c75c8606d59b37cd0bae8d4b962eb35) 
+  - 리덕스 기반이 아니기 때문에 Boilerplate 양이 현저히 적었다  [(RTK쿼리 적용 커밋)](https://github.com/eunbbori/wanted-pre-onboarding-challenge-fe-1/commit/4095d9d21c75c8606d59b37cd0bae8d4b962eb35) 
     - 불필요한 작업이 필요없어짐과 동시에 소스코드의 복잡성을 낮추어 유지보수의 용이성을 높였다
   - API 상태와 관련된 다양한 데이터를 제공하여 복잡한 구현과 설계 없이도 개발자가 효율적으로 화면을 구성할 수 있게 도와준다
     - isError,isFetched,isLoading,isRefetching,isStale 등 
-- [React쿼리 적용 커밋](d4b50c57e5facc94e9e1327866030ad04e6cbe5e)
+- [React쿼리 적용 커밋](https://github.com/eunbbori/wanted-pre-onboarding-challenge-fe-1/commit/d4b50c57e5facc94e9e1327866030ad04e6cbe5e)
 
 ### TokenContext 통해 Token 상태 전역 관리 
 - 기존 react-query 만으로는 로그인 토큰이 전역으로 관리되지 못해 캐싱이 무효화되지 않는 문제 발생했다.
@@ -256,10 +256,10 @@ yarn start
 
 - 파괴적 버튼
   - 로그아웃,삭제 등 되돌리기 어렵거나 불가능한 경우에 AlertDialog 띄웠습니다.
-  - [커밋보기](cb3465114c46c49b1a81891dcd8591d4b253c885)
+  - [커밋보기](https://github.com/eunbbori/wanted-pre-onboarding-challenge-fe-1/commit/cb3465114c46c49b1a81891dcd8591d4b253c885)
 - onbeforeunload 
   - 입력이 많은 form(회원가입,할일 추가 등) 페이지에서 사용자가 입력 중일때 실수로 창을 끄거나 새로고침 동작을 할 경우 정말로 페이지를 이동할 지에 대한 경고창 띄웠습니다.
-  - [커밋보기](f0f1b04acd20632affc165ff0fd644307579206a)
+  - [커밋보기](https://github.com/eunbbori/wanted-pre-onboarding-challenge-fe-1/commit/f0f1b04acd20632affc165ff0fd644307579206a)
 
 ## 프로젝트 진행 시 주안점 
 다른 사람이 보더라도 쉽게 읽히고 이해가 가는 가독성에 주안점을 두고 코드를 작성하려했습니다. 또한 처음으로 React-Query를 학습해봄으로써 CRUD 기본 응용을 오류 없이 완성하는 것이 목표였습니다.
