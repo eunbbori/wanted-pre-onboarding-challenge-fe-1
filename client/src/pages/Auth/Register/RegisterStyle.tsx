@@ -63,7 +63,7 @@ export const InputDiv = styled.div<InputDiv>`
 `;
 
 export const ErrorDiv = styled.div`
-  font-size: 0.5rem;
+  font-size: 1rem;
   color: #f03f35;
   font-weight: bold;
   margin-left: 60px;

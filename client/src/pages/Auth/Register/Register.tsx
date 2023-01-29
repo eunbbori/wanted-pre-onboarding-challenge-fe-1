@@ -21,6 +21,7 @@ import {
 } from "./RegisterStyle";
 
 const Register = () => {
+  //TODO 회원가입 하기 전에 입력한 정보 한 번 더 보여주기
   const {
     register,
     handleSubmit,
@@ -51,6 +52,9 @@ const Register = () => {
           return;
         }
         alert("이미 존재하는 사용자입니다.");
+      },
+      onError: () => {
+        alert("이미 존재하는 email 계정입니다.");
       },
     });
   };

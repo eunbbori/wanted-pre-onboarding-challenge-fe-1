@@ -38,13 +38,18 @@ const Login = () => {
     const loginData = { email, password };
     login(loginData, {
       onSuccess: (data) => {
+        console.log(data);
         if (data.token) {
-          console.log(data.token);
+          // console.log(data.token);
           saveToken(data.token);
           navigate("/");
           return;
         }
-        alert("로그인에 실패했습니다. 로그인 정보를 다시 확인해주세요");
+        //어떤 경우에 이 alert이 나오는가?
+        alert("존재하지 않는 email 계정입니다.");
+      },
+      onError: () => {
+        alert("로그인 정보를 확인해주시기 바랍니다.");
       },
     });
   };
